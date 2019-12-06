@@ -1,0 +1,182 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+body {
+  line-height: 1.5;
+}
+ol, ul {
+  list-style: none;
+}
+blockquote, q {
+  quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* My CSS */
+
+html {
+  background-color: rgb(236, 238, 241);
+  font-size: 12px;
+  line-height: 1.5;
+  text-align: center;
+}
+
+header {
+  font-family: AvenirNext,Avenir,Helvetica Neue,Helvetica,Arial,sans-serif;
+    font-weight: 400;
+    color: #505050;
+    align-content: center;
+}
+
+#sign-in {
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px 30px;
+}
+
+#sign-in-nav {
+  display: inherit;
+  flex-direction: column;
+  
+}
+
+#sign-in-btn {
+  float: right;
+}
+
+button {
+  background-color: rgb(0,119,197);
+  border-radius: 4px;
+  border-width: 1px;
+  border-color: rgb(76,76,76);
+  color: rgb(255,255,255);
+  height: 32px;
+  padding: 0 20px;
+  font-size: 13.5px;
+}
+#lock-img {
+  /* background-color: white; */
+  background-image: url(https://plugin.intuitcdn.net/identity-authn-core-ui/1.6.5/images/icon-whitelock@3x.png);
+  height: 1em;
+  width: .8em;
+  display: inline-block;
+  vertical-align: text-top;
+  margin-top: 2px;
+  margin-right: 4px;
+  background-size: contain;
+}
+
+
+#sign-in-btn {
+  margin-left: 10px;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:focus {
+  outline: dotted thin;
+}
+
+a:visited {
+  color: #0077C5;
+  
+}
+
+li a {
+  color: #505050;
+  width: 23px;
+  height: 23px;
+  margin-right: 4px;
+}
+
+li a:visited {
+  color: #505050;
+}
+
+#intuit-name-link {
+  display: block;
+  background-image: url(https://plugin.intuitcdn.net/identity-authn-core-ui/images/ecosystem_logos_new-a1ca21cc.png);
+  height: 35px;
+  width: 118px;
+  margin: 20px auto;
+}
+
+
+
+.product {
+  text-transform: lowercase;
+  font-size: 18px;
+  font-weight: 100;
+}
+
+.icon {
+  width: 23px;
+  height: 23px;
+  margin-right: 4px;
+}
+
+.icon:hover {
+  cursor: pointer;
+}
+
+#mint-icon {
+  background: url(https://plugin.intuitcdn.net/identity-authn-core-ui/images/mint-favicon-4accf8f4.svg) no-repeat;
+}
+
+#quickbooks-icon {
+  background: url(https://plugin.intuitcdn.net/identity-authn-core-ui/images/quickbooks-favicon@2x-c89488e8.svg) no-repeat;
+}
+
+#turbotax-icon {
+  background: url(https://plugin.intuitcdn.net/identity-authn-core-ui/images/tt-favicon@2x-fbd64ab8.svg) no-repeat;
+}
+
+#footer-items li {
+  display: inline-block;
+}
+
+#footer-items #product-listing {
+  
+}
+
+#product-listing li {
+  display: inline-block;
+  vertical-align: middle;
+}

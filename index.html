@@ -8,19 +8,28 @@
 <body>
 <header>
 <div id="sign-in">
-  Already have an Intuit account?
-  <a id="forgotten-info" href="https://accounts.intuit.com/account-recovery.html">I forgot my User ID or Password</a>
-  <button id="sign-in-btn">Sign In</button>
+  <div id="sign-in-nav">
+      <div>Already have an Intuit account?</div>
+      <a id="forgotten-info" href="https://accounts.intuit.com/account-recovery.html">I forgot my User ID or Password</a>
+  </div>
+  
+  <button id="sign-in-btn">
+    <span id="lock-img"></span>
+    Sign In</button>
 </div>
 
-    <div id="intuit-name">
-        Intuit
-        <div id="product-listing">
-          Mint
-          Quickbooks
-          TurboTax
-        </div>
-      </div>
+    <!-- <div id="intuit-name"> -->
+        <a id="intuit-name-link" href="https://accounts.intuit.com/signup.html"></a>
+
+      <!-- </div> -->
+      <ul id="product-listing">
+          <li id="mint-icon" class="icon"></li>
+          <li id="mint-text" class="product"><a href="https://www.mint.com/">Mint</a></li>
+          <li id="quickbooks-icon" class="icon"></li>
+          <li id="quickbooks-text" class="product"><a href="https://quickbooks.intuit.com/">Quickbooks</a></li>
+          <li id="turbotax-icon" class="icon"></li>
+          <li id="turbotax-text" class="product"><a href="https://turbotax.intuit.com/">Turbotax</a></li>
+        </ul>
 </header>
 
 <form id="sign-up-form">
