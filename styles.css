@@ -56,6 +56,8 @@ html {
   text-align: center;
 }
 
+/**************** Header **********************/
+
 header {
   font-family: AvenirNext,Avenir,Helvetica Neue,Helvetica,Arial,sans-serif;
     font-weight: 400;
@@ -146,6 +148,15 @@ li a:visited {
   font-weight: 100;
 }
 
+#product-listing {
+  margin-bottom: 20px;
+}
+
+#product-listing li {
+  display: inline-block;
+  vertical-align: middle;
+}
+
 .icon {
   width: 23px;
   height: 23px;
@@ -168,15 +179,21 @@ li a:visited {
   background: url(https://plugin.intuitcdn.net/identity-authn-core-ui/images/tt-favicon@2x-fbd64ab8.svg) no-repeat;
 }
 
+
+/*********************** Form ************************/
+form {
+  width: 400px; 
+  background-color: white;
+  border-width: 1px;
+  border-color: gray;
+  border-style: solid;
+  margin: 0 auto;
+}
+/*********************** Footer **********************/
+
 #footer-items li {
   display: inline-block;
 }
 
-#footer-items #product-listing {
-  
-}
 
-#product-listing li {
-  display: inline-block;
-  vertical-align: middle;
-}
+
