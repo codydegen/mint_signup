@@ -15,13 +15,15 @@ table, caption, tbody, tfoot, thead, tr, th, td,
 article, aside, canvas, details, embed, 
 figure, figcaption, footer, header, hgroup, 
 menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
+time, mark, audio, video, input {
   margin: 0;
   padding: 0;
   border: 0;
   font-size: 100%;
   font: inherit;
   vertical-align: baseline;
+  box-sizing: border-box;
+  font-family: AvenirNext,Avenir,Helvetica Neue,Helvetica,Arial,sans-serif;
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, 
@@ -90,6 +92,7 @@ button {
   height: 32px;
   padding: 0 20px;
   font-size: 13.5px;
+  cursor: pointer;
 }
 #lock-img {
   /* background-color: white; */
@@ -140,7 +143,9 @@ li a:visited {
   margin: 20px auto;
 }
 
-
+#footer-items > li > a:hover {
+  text-decoration: underline;
+}
 
 .product {
   text-transform: lowercase;
@@ -182,17 +187,128 @@ li a:visited {
 
 /*********************** Form ************************/
 form {
-  width: 400px; 
+  /* width: 400px;  */
   background-color: white;
-  border-width: 1px;
+  /* border-width: 1px;
   border-color: gray;
-  border-style: solid;
+  border-style: solid; */
   margin: 0 auto;
+  /* border-bottom-width: 0; */
 }
+
+fieldset {
+  display: flex;
+  font-family: AvenirNext,Avenir,Helvetica Neue,Helvetica,Arial,sans-serif;
+  padding: 30px;
+  
+}
+
+#sign-up-create-account {
+  font-size: 24px;
+}
+
+#sign-up-header {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 20px;
+  color: #4c4c4c;
+}
+
+#sign-up-subhed {
+  font-size: 14px;
+  padding-top: 20px;
+}
+
+label {
+  padding-bottom: 6px;
+  color: #404040;
+  font-size: 14px;
+  text-align: left;
+}
+
+input {
+  width: 320px;
+  height: 34px;
+  padding: 0 6px 0 8px;
+  border-radius: 3px;
+  border: 1px solid #c1c5c8;
+  line-height: 1.3em;
+}
+
+#email-error {
+  text-align: left;
+  color: #eb3432;
+  margin: 5px 0;
+}
+
+#tel-info {
+  padding: 5px 0;
+  color: #444;
+  font-size: 10px;
+  text-align: left;
+}
+
+#password-error {
+  height: 20px;
+  margin: 5px 0;
+}
+
+#create-account {
+  width: 318px;
+  height: 44px;
+  font-size: 15.75px;
+  padding: 6px 12px;
+  margin-bottom: 30px;
+  border: #0077c5;
+  box-shadow: 0 1px 1px 0 rgba(0,0,0,0.75);
+}
+
+#create-account-lock-img {
+  /* background-color: white; */
+  background-image: url(https://plugin.intuitcdn.net/identity-authn-core-ui/images/icon-whitelock@3x-76f33cec.png);  height: 1em;
+  width: .8em;
+  display: inline-block;
+  vertical-align: text-top;
+  margin-top: 2px;
+  margin-right: 4px;
+  background-size: contain;
+}
+
+#create-account-info {
+
+}
+
+#form-footer {
+  background-color: #eceef1;
+  font-size: 10px;
+  color: #8d9096;
+  /* border: 1px black solid; */
+  padding: 16px;
+  /* width: 398px;
+  border-top-width: 0;
+  border-color: rgb(199, 199, 199); */
+}
+
+#sign-up-widget {
+  width: 380px;
+  border: 1px rgb(199, 199, 199) solid;
+  margin: auto;
+}
+
 /*********************** Footer **********************/
+
+footer {
+  padding: 20px 0;
+}
 
 #footer-items li {
   display: inline-block;
+}
+
+
+
+#copyright {
+  color: #505050;
 }
 
 
