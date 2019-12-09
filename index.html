@@ -36,26 +36,33 @@
 <form id="sign-up-form">
   <fieldset id="sign-up-fieldset">
     <header id="sign-up-header">
-      <span id="sign-up-create-account">Create an Intuit account</span>
+      <span id="sign-up-create-account" class="mo">Create an Intuit account</span>
       <span id="sign-up-subhed">One account for everything Intuit, including Mint.</span>
       <a id="learn-more" href="https://accounts-help.lc.intuit.com/questions/1582580-creating-an-account">Learn more</a>
     </header>
-    <label for="email-input">Email address</label>
-    <input type="email" name="email" id="email-input" required> 
-    <div id="email-popout" class="popup">You'll use this as your user ID</div>
-    <div id="email-arrow" class="popup-arrow"></div>
-    <span id="email-error">Please enter a valid email address.</span>
+    <div id="email-wrapper" class="mo">
+      <label for="email-input">Email address</label>
+      <input type="email" name="email" id="email-input" required> 
+    </div>
+      <!-- <div id="email-popout" class="popup">You'll use this as your user ID</div>
+      <div id="email-arrow" class="popup-arrow"></div> -->
+      <span id="email-error">Please enter a valid email address.</span>
+
     <!-- Add pop up when input has focus  -->
-    <label for="phone-input">Phone (recommended)</label>
-    <input type="tel" name="phone" id="phone-input">
-    <div id="phone-popout" class="popup">We strongly recommend adding a phone number.  This will help verify your account and keep it safe.</div>
-    <div id="phone-arrow" class="popup-arrow"></div>
-    <span id="tel-info">Standard call, messaging or data rates may apply.</span>
-    <label for="password-input">Password</label>
-    <input type="password" name="password" id="password-input" required>
-    <div id="password-popup" class="popup">Create a password you've never used before.  This will help keep your account safe.</div>
-    <div id="password-arrow" class="popup-arrow"></div>
-    <span id="password-error"></span>
+    <div id="phone-wrapper" class="mo">
+      <label for="phone-input">Phone (recommended)</label>
+      <input type="tel" name="phone" id="phone-input">
+      <!-- <div id="phone-popout" class="popup">We strongly recommend adding a phone number.  This will help verify your account and keep it safe.</div>
+      <div id="phone-arrow" class="popup-arrow"></div> -->
+      <span id="tel-info">Standard call, messaging or data rates may apply.</span>
+    </div>
+    <div id="password-wrapper" class="mo">
+      <label for="password-input">Password</label>
+      <input type="password" name="password" id="password-input" required>
+      <!-- <div id="password-popup" class="popup">Create a password you've never used before.  This will help keep your account safe.</div>
+      <div id="password-arrow" class="popup-arrow"></div> -->
+      <span id="password-error"></span>
+    </div>
     <button name="submit" id="create-account">
       <span id="create-account-lock-img"></span>
       Create Account

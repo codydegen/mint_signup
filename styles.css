@@ -224,6 +224,7 @@ label {
   color: #404040;
   font-size: 14px;
   text-align: left;
+  display: block;
 }
 
 input {
@@ -272,10 +273,6 @@ input {
   margin-top: 2px;
   margin-right: 4px;
   background-size: contain;
-}
-
-#create-account-info {
-
 }
 
 #form-footer {
@@ -327,6 +324,71 @@ input {
   bottom: 63px;
 }
 
+.mo:focus-within:after {
+  position: absolute;
+  left: 883px;
+  top: 351px;
+  /* bottom: 160px; */
+  background: rgb(64,64,64);
+  /* height: 40px; */
+  content: "Create a password you've never used before.  This will help keep your account safe.";
+  content: "You'll use this as your user ID";
+  /* position: absolute; */
+
+  /* content: "search by voice"; */
+
+  /* left: 50%; */
+  transform: translate(-50%);
+  width: 200px;
+  padding: 8px 4px;
+  border-radius: 4px;
+  /* background: #111; */
+  color: #eee;
+  font-weight: 500;
+}
+
+.arrow:focus-within:before {
+  width: 0; 
+  height: 0; 
+  position: absolute;
+  left: 772px;
+  top: 360px;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent; 
+  border-right:8px solid rgb(64,64,64); 
+  content: '';
+}
+
+
+
+/* .mo:hover::after {
+  position: absolute;
+  top: 28px;
+  left: 50%;
+  transform: translate(-50%);
+  width: 100px;
+  padding: 8px 4px;
+  border-radius: 2px;
+  color: #eee;
+  font-weight: 500;
+}
+
+.mo:hover:before {
+  content: '';
+  width: 1px;
+  height: 1px;
+  background: transparent;
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  transform: translate(-50%);
+  border: 8px solid transparent;
+  border-bottom: 8px solid rgb(64,64,64);
+} */
+
+/* .mo:hover {
+  background: red;
+} */
 
 /*********************** Footer **********************/
 
