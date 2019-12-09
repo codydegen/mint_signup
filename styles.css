@@ -295,6 +295,39 @@ input {
   margin: auto;
 }
 
+/********************** Pop-ins ****************************/
+.popup {
+  background: rgb(64,64,64);
+  position: relative;
+  color: white;
+  left: 340px;
+  bottom: 50px;
+  width: 200px;
+  text-align: left;
+  padding: 10px 20px;
+  border-radius: 4px;
+}
+
+.popup-arrow {
+  width: 0; 
+  height: 0; 
+  position: relative;
+  left: 332px;
+  bottom: 100px;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent; 
+  border-right:8px solid rgb(64,64,64); 
+}
+
+#email-popout {
+  bottom: 35px;
+}
+
+#email-arrow {
+  bottom: 63px;
+}
+
+
 /*********************** Footer **********************/
 
 footer {
