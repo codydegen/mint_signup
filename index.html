@@ -24,12 +24,12 @@
 
       <!-- </div> -->
       <ul id="product-listing">
-          <li id="mint-icon" class="icon"></li>
-          <li id="mint-text" class="product"><a href="https://www.mint.com/">Mint</a></li>
+        <li id="turbotax-icon" class="icon"></li>
+        <li id="turbotax-text" class="product"><a href="https://turbotax.intuit.com/">Turbotax</a></li>
           <li id="quickbooks-icon" class="icon"></li>
           <li id="quickbooks-text" class="product"><a href="https://quickbooks.intuit.com/">Quickbooks</a></li>
-          <li id="turbotax-icon" class="icon"></li>
-          <li id="turbotax-text" class="product"><a href="https://turbotax.intuit.com/">Turbotax</a></li>
+          <li id="mint-icon" class="icon"></li>
+          <li id="mint-text" class="product"><a href="https://www.mint.com/">Mint</a></li>
         </ul>
 </header>
 <section id="sign-up-widget">
@@ -43,8 +43,8 @@
     <div id="email-wrapper" class="mo">
       <label for="email-input">Email address</label>
       <input type="email" name="email" id="email-input" required> 
-      <span id="email-info">You'll use this as your user ID</span>
-      <span id="email-arrow" class="popup-arrow"></span>
+      <span id="email-info" class="focus">You'll use this as your user ID</span>
+      <span id="email-arrow" class="focus popup-arrow"></span>
       <span id="email-error">Please enter a valid email address.</span>
     </div>
       <!-- <div id="email-popout" class="popup">You'll use this as your user ID</div>
@@ -62,12 +62,13 @@
     <div id="password-wrapper" class="mo">
       <label for="password-input">Password</label>
       <input type="password" name="password" id="password-input" required>
+      <div id="password-lock-icon"></div>
       <!-- <div id="password-popup" class="popup">Create a password you've never used before.  This will help keep your account safe.</div>
       <div id="password-arrow" class="popup-arrow"></div> -->
-      <span id="password-error"></span>
+      <div id="password-error">test</div>
     </div>
     <button name="submit" id="create-account">
-      <span id="create-account-lock-img"></span>
+      <div id="create-account-lock-img"></div>
       Create Account
     </button>
 

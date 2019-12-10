@@ -12,3 +12,4 @@ const turbotaxClick = document.getElementById('turbotax-icon');
 turbotaxClick.addEventListener('click', () => {
   window.open('https://www.turbotax.intuit.com');
 });
+

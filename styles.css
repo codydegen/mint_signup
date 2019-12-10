@@ -226,6 +226,7 @@ label {
   font-size: 14px;
   text-align: left;
   display: block;
+  /* box-shadow: 0,0,0,  */
 }
 
 input {
@@ -237,16 +238,28 @@ input {
   line-height: 1.3em;
 }
 
-#email-error {
+input:focus {
+  outline: 0 none;
+  border: 1px solid rgba(82,168,236,.8);
+  box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(82,168,236,.6);
+  outline-offset: -2px;
+}
+
+/* #email-error {
   position: absolute;
   font-size: .85em;
   background-color: #404040;
   top: 0;
   margin-left: 15px;
   left: 100%;
+} */
+
+#email-wrapper {
+  height: auto;
 }
 
 #email-error {
+  display: block;
   text-align: left;
   color: #eb3432;
   margin: 5px 0;
@@ -259,10 +272,24 @@ input {
   text-align: left;
 }
 
+#password-lock-icon {
+  position: absolute;
+  top: 28px;
+  left: 288px;
+  background: url(https://plugin.intuitcdn.net/identity-authn-core-ui/images/lock-left-grey@3x-a1ab5bd1.png) no-repeat 0 50%/21px 21px;
+  width: 33px;
+  height: 30px;
+  /* background: white; */
+}
+
 #password-error {
   height: 20px;
   margin: 5px 0;
+  text-align: left;
+  visibility: hidden;
 }
+
+
 
 #create-account {
   width: 318px;
@@ -276,7 +303,8 @@ input {
 
 #create-account-lock-img {
   /* background-color: white; */
-  background-image: url(https://plugin.intuitcdn.net/identity-authn-core-ui/images/icon-whitelock@3x-76f33cec.png);  height: 1em;
+  background-image: url(https://plugin.intuitcdn.net/identity-authn-core-ui/images/icon-whitelock@3x-76f33cec.png);  
+  height: 1em;
   width: .8em;
   display: inline-block;
   vertical-align: text-top;
@@ -316,22 +344,31 @@ input {
 }
 
 .popup-arrow {
-  width: 0; 
-  height: 0; 
+  display: block;
+  width: 0px; 
+  height: 0px; 
   position: relative;
-  left: 332px;
-  bottom: 100px;
-  border-top: 7px solid transparent;
-  border-bottom: 7px solid transparent; 
-  border-right:7px solid rgb(64,64,64); 
+  left: 327px;
+  /* bottom: 10px; */
+  /* Change left and bottom position if angle is changed */
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent; 
+  border-right: 8px solid rgb(64,64,64); 
 }
+
+
 
 #email-popout {
   bottom: 35px;
 }
 
 #email-arrow {
-  bottom: 63px;
+  position: absolute;
+  bottom: 30px;
+}
+
+#phone-wrapper {
+  height: 115px;
 }
 
 .mo {
@@ -341,6 +378,10 @@ input {
 #email-error {
   visibility: hidden;
 }
+
+/* #email-error {
+  visibility: visible;
+} */
 
 /* Switch to pseudo-element after fixed */
 #email-info {
@@ -359,25 +400,21 @@ input {
 
 }
 
-.mo:focus-within:after {
+.focus {
+  visibility: hidden;
+}
+
+/* .mo:focus-within:after {
   position: absolute;
   left: 0px;
   top: 0px;
-  /* bottom: 160px; */
   background: rgb(64,64,64);
-  /* height: 40px; */
   content: "Create a password you've never used before.  This will help keep your account safe.";
   content: "You'll use this as your user ID";
-  /* position: absolute; */
-
-  /* content: "search by voice"; */
-
-  /* left: 50%; */
   transform: translate(-50%);
   width: 200px;
   padding: 8px 4px;
   border-radius: 4px;
-  /* background: #111; */
   color: #eee;
   font-weight: 500;
 }
@@ -388,12 +425,9 @@ input {
   position: absolute;
   left: 772px;
   top: 360px;
-  border-top: 8px solid transparent;
-  border-bottom: 8px solid transparent; 
-  border-right:8px solid rgb(64,64,64); 
   content: '';
 }
-
+ */
 
 
 /* .mo:hover::after {
