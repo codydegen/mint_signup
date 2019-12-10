@@ -32,6 +32,7 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
   line-height: 1.5;
+  position: relative;
 }
 ol, ul {
   list-style: none;
@@ -237,6 +238,15 @@ input {
 }
 
 #email-error {
+  position: absolute;
+  font-size: .85em;
+  background-color: #404040;
+  top: 0;
+  margin-left: 15px;
+  left: 100%;
+}
+
+#email-error {
   text-align: left;
   color: #eb3432;
   margin: 5px 0;
@@ -311,9 +321,9 @@ input {
   position: relative;
   left: 332px;
   bottom: 100px;
-  border-top: 8px solid transparent;
-  border-bottom: 8px solid transparent; 
-  border-right:8px solid rgb(64,64,64); 
+  border-top: 7px solid transparent;
+  border-bottom: 7px solid transparent; 
+  border-right:7px solid rgb(64,64,64); 
 }
 
 #email-popout {
@@ -324,10 +334,35 @@ input {
   bottom: 63px;
 }
 
+.mo {
+  position: relative;
+}
+
+#email-error {
+  visibility: hidden;
+}
+
+/* Switch to pseudo-element after fixed */
+#email-info {
+  visibility: visible;
+  position: absolute;
+  margin-left: 15px;
+  margin-bottom: 0;
+  margin-top: 0;
+  left: 100%;
+  width: 220px;
+  top: 27px;
+  padding: 10px 20px;
+  color: white;
+  border-radius: 4px;
+  background-color: rgb(64,64,64);
+
+}
+
 .mo:focus-within:after {
   position: absolute;
-  left: 883px;
-  top: 351px;
+  left: 0px;
+  top: 0px;
   /* bottom: 160px; */
   background: rgb(64,64,64);
   /* height: 40px; */
