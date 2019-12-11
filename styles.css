@@ -142,7 +142,19 @@ li a:visited {
   height: 35px;
   width: 118px;
   margin: 20px auto;
+  animation: fadein 733ms ease-in forwards;
 }
+
+@keyframes fadein {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* @keyframes fade-in {
+  to {
+      opacity: 1
+  }
+} */
 
 #footer-items > li > a:hover {
   text-decoration: underline;
@@ -332,7 +344,8 @@ input:focus {
 
 /********************** Pop-ins ****************************/
 .popup {
-  background: rgb(64,64,64);
+  visibility: hidden;
+  /* background: rgb(64,64,64);
   position: relative;
   color: white;
   left: 340px;
@@ -340,7 +353,7 @@ input:focus {
   width: 200px;
   text-align: left;
   padding: 10px 20px;
-  border-radius: 4px;
+  border-radius: 4px; */
 }
 
 .popup-arrow {
@@ -356,36 +369,8 @@ input:focus {
   border-right: 8px solid rgb(64,64,64); 
 }
 
-
-
-#email-popout {
-  bottom: 35px;
-}
-
-#email-arrow {
-  position: absolute;
-  bottom: 30px;
-}
-
-#phone-wrapper {
-  height: 115px;
-}
-
-.mo {
-  position: relative;
-}
-
-#email-error {
-  visibility: hidden;
-}
-
-/* #email-error {
-  visibility: visible;
-} */
-
-/* Switch to pseudo-element after fixed */
-#email-info {
-  visibility: visible;
+.popup-body {
+  /* visibility: visible; */
   position: absolute;
   margin-left: 15px;
   margin-bottom: 0;
@@ -397,11 +382,43 @@ input:focus {
   color: white;
   border-radius: 4px;
   background-color: rgb(64,64,64);
-
+  line-height: 1.2;
+  text-align: left;
 }
 
-.focus {
+#email-popout {
+  bottom: 35px;
+}
+
+#email-arrow {
+  position: absolute;
+  bottom: 32px;
+}
+
+#phone-wrapper {
+  height: 115px;
+}
+
+#phone-arrow {
+  position: absolute;
+  bottom: 60px;
+}
+
+#password-arrow {
+  bottom: 25px;
+}
+
+.mo {
+  position: relative;
+}
+
+#email-error {
   visibility: hidden;
+}
+
+
+.visible {
+  visibility: visible;
 }
 
 /* .mo:focus-within:after {
