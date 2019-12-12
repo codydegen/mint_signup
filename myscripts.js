@@ -24,6 +24,7 @@ emailClick.addEventListener('focus', () => {
     // console.log(item);
     item.classList.add('visible');
   }
+  emailValidate();
 });
 
 emailClick.addEventListener('blur', () => {
@@ -31,6 +32,7 @@ emailClick.addEventListener('blur', () => {
     // console.log(item);
     item.classList.remove('visible');
   }
+  emailValidate();
 });
 
 //Figure out a better way to do this
@@ -67,3 +69,31 @@ passwordClick.addEventListener('blur', () => {
     item.classList.remove('visible');
   }
 });
+
+function emailValidate() {
+  const email = document.getElementById('email-input');
+  console.log(email);
+  let mailFormat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,256})+$/
+  if((email.value === '') || (email === document.activeElement)) {
+    changeEmailStatus('email-none');
+  } else if(email.value.match(mailFormat)) {
+    changeEmailStatus('email-true');
+    document.querySelector('#email-input').classList = '';
+  } else {
+    changeEmailStatus('email-false');
+    document.querySelector('#email-input').classList = 'email-validation-failed';
+
+  }
+
+}
+
+function changeEmailStatus(status) {
+  document.querySelector('#email-validation-icon').className = status;
+  if(status === 'email-false') {
+    document.querySelector('#email-input').classList = 'email-validation-failed';
+    document.querySelector('#email-error').classList = 'visible';
+  } else {
+    document.querySelector('#email-input').classList = '';
+    document.querySelector('#email-error').classList = '';
+  }
+}

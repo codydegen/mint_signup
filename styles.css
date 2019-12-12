@@ -238,6 +238,7 @@ label {
   font-size: 14px;
   text-align: left;
   display: block;
+  /* font-size: 1.4em; */
   /* box-shadow: 0,0,0,  */
 }
 
@@ -248,6 +249,8 @@ input {
   border-radius: 3px;
   border: 1px solid #c1c5c8;
   line-height: 1.3em;
+  font-size: 1.2em;
+
 }
 
 input:focus {
@@ -275,6 +278,39 @@ input:focus {
   text-align: left;
   color: #eb3432;
   margin: 5px 0;
+  visibility: hidden;
+  line-height: 1.2em;
+  height: 20px;
+}
+
+#email-error.visible {
+  visibility: visible;
+}
+
+.email-validation-failed {
+  border-color: red;
+}
+
+#email-validation-icon {
+  position: absolute;
+  top: 29px;
+  left: 290px;
+  /* background: url(https://plugin.intuitcdn.net/identity-authn-core-ui/images/lock-left-grey@3x-a1ab5bd1.png) no-repeat 0 50%/21px 21px; */
+  width: 33px;
+  height: 30px;
+  /* background: white; */
+}
+
+.email-none {
+  background: ;
+}
+
+.email-true {
+  background: url(https://plugin.intuitcdn.net/identity-authn-core-ui/images/check@44-fc6644e9.png) no-repeat 0 50%/22px 22px;
+}
+
+.email-false {
+  background: url(https://plugin.intuitcdn.net/identity-authn-core-ui/images/warning@44-880d626e.png) no-repeat 0 50%/22px 22px;
 }
 
 #tel-info {
@@ -282,6 +318,7 @@ input:focus {
   color: #444;
   font-size: 10px;
   text-align: left;
+  display: block;
 }
 
 #password-lock-icon {
@@ -412,13 +449,11 @@ input:focus {
   position: relative;
 }
 
-#email-error {
-  visibility: hidden;
-}
 
 
 .visible {
   visibility: visible;
+
 }
 
 /* .mo:focus-within:after {
