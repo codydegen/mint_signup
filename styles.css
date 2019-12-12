@@ -242,18 +242,18 @@ label {
   /* box-shadow: 0,0,0,  */
 }
 
-input {
+.text-input {
   width: 320px;
   height: 34px;
   padding: 0 6px 0 8px;
   border-radius: 3px;
   border: 1px solid #c1c5c8;
   line-height: 1.3em;
-  font-size: 1.2em;
+  font-size: 1.4em;
 
 }
 
-input:focus {
+.text-input:focus {
   outline: 0 none;
   border: 1px solid rgba(82,168,236,.8);
   box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(82,168,236,.6);
@@ -287,11 +287,11 @@ input:focus {
   visibility: visible;
 }
 
-.email-validation-failed {
+.validation-failed {
   border-color: red;
 }
 
-#email-validation-icon {
+.validation-icon {
   position: absolute;
   top: 29px;
   left: 290px;
@@ -301,24 +301,108 @@ input:focus {
   /* background: white; */
 }
 
-.email-none {
-  background: ;
+.verif-none {
+  background: none;
 }
 
-.email-true {
+.verif-true {
   background: url(https://plugin.intuitcdn.net/identity-authn-core-ui/images/check@44-fc6644e9.png) no-repeat 0 50%/22px 22px;
 }
 
-.email-false {
+.verif-false {
   background: url(https://plugin.intuitcdn.net/identity-authn-core-ui/images/warning@44-880d626e.png) no-repeat 0 50%/22px 22px;
 }
 
-#tel-info {
+.verif-warning {
+  background: url(https://plugin.intuitcdn.net/identity-authn-core-ui/images/caution@44-8452c619.png) no-repeat 0 50%/22px 22px;
+}
+
+#phone-info {
   padding: 5px 0;
   color: #444;
   font-size: 10px;
   text-align: left;
+  height: 30px;
+  /* display: block; */
+
+}
+#phone-verification-container {
+  display: none;
+  position: relative;
+  text-align: left;
+  padding-bottom: 30px;
+}
+
+#phone-verification-container.visible {
   display: block;
+}
+
+#phone-verification {
+  /* top: 5px; */
+  /* left: 100px; */
+  /* position: absolute; */
+  vertical-align: middle;
+  display: inline-block;
+  background: white;
+  -webkit-appearance: none;
+  border: 1px solid #d8d8d8;
+  border-radius: 3px;
+  width: 19px;
+  height: 19px;
+  cursor: pointer;
+  margin-right: 8px;
+  box-sizing: border-box;
+}
+
+#phone-verification:checked:after {
+  content: '';
+  box-sizing: border-box;
+  font-size: 14px;
+  position: absolute;
+  top: 7px;
+  left: 4px;
+  border-color: #00b100;
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+  width: 12px;
+  height: 6px;
+  border-style: solid;
+  border-width: 0 0 2px 2px;
+}
+
+#phone-verification-label {
+  display: inline;
+}
+
+i {
+  color: #757575;
+  font-style: italic;
+  font-size: 12px;
+}
+
+#phone-warning {
+  color: #ea7f00;
+  font-size: 14px;
+  text-align: left;
+  /* display: none; */
+}
+
+#phone-error {
+  /* display: block; */
+  text-align: left;
+  color: #eb3432;
+  margin: 5px 0;
+  /* visibility: hidden; */
+  line-height: 1.2em;
+  height: 20px;
+}
+
+.disp-block {
+  display: block;
+}
+
+.disp-none {
+  display: none;
 }
 
 #password-lock-icon {
@@ -433,7 +517,7 @@ input:focus {
 }
 
 #phone-wrapper {
-  height: 115px;
+  min-height: 115px;
 }
 
 #phone-arrow {

@@ -44,6 +44,7 @@ phoneClick.addEventListener('focus', () => {
     // console.log(item);
     item.classList.add('visible');
   }
+  phoneValidate();
 });
 
 phoneClick.addEventListener('blur', () => {
@@ -51,6 +52,7 @@ phoneClick.addEventListener('blur', () => {
     // console.log(item);
     item.classList.remove('visible');
   }
+  phoneValidate();
 });
 
 const passwordClick = document.getElementById('password-input');
@@ -75,25 +77,62 @@ function emailValidate() {
   console.log(email);
   let mailFormat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,256})+$/
   if((email.value === '') || (email === document.activeElement)) {
-    changeEmailStatus('email-none');
+    changeEmailStatus('verif-none');
   } else if(email.value.match(mailFormat)) {
-    changeEmailStatus('email-true');
-    document.querySelector('#email-input').classList = '';
+    changeEmailStatus('verif-true');
+    // document.querySelector('#email-input').classList = '';
   } else {
-    changeEmailStatus('email-false');
-    document.querySelector('#email-input').classList = 'email-validation-failed';
+    changeEmailStatus('verif-false');
+    // document.querySelector('#email-input').classList = 'email-validation-failed';
 
   }
 
 }
 
 function changeEmailStatus(status) {
-  document.querySelector('#email-validation-icon').className = status;
-  if(status === 'email-false') {
-    document.querySelector('#email-input').classList = 'email-validation-failed';
-    document.querySelector('#email-error').classList = 'visible';
+  document.querySelector('#email-validation-icon').className = 'validation-icon '+ status;
+  if(status === 'verif-false') {
+    document.querySelector('#email-input').classList.add('validation-failed');
+    document.querySelector('#email-error').classList.add('visible');
   } else {
-    document.querySelector('#email-input').classList = '';
-    document.querySelector('#email-error').classList = '';
+    document.querySelector('#email-input').classList.remove('validation-failed');
+    document.querySelector('#email-error').classList.remove('visible');
+  }
+}
+
+function phoneValidate() {
+  const phone = document.getElementById('phone-input');
+  const phoneIcon = document.getElementById('phone-validation-icon');
+  if(phone === document.activeElement) {
+    //show standard text box and phone number verification
+    changePhoneStatus('verif-none');
+  } else if(phone.value === '') {
+    changePhoneStatus('verif-warning');
+  } else {
+    //error
+    changePhoneStatus('verif-false');
+  }
+}
+
+function changePhoneStatus(status) {
+  document.querySelector('#phone-validation-icon').className = 'validation-icon '+ status;
+  if(status === 'verif-warning') {
+    document.querySelector('#phone-info').classList = 'disp-none';
+    document.querySelector('#phone-warning').classList = 'disp-block';
+    document.querySelector('#phone-error').classList = 'disp-none';
+    document.querySelector('#phone-verification-container').classList.remove('visible');
+    document.querySelector('#phone-input').classList.remove('validation-failed');
+  } else if(status === 'verif-none') {
+    document.querySelector('#phone-info').classList = 'disp-block';
+    document.querySelector('#phone-warning').classList = 'disp-none';
+    document.querySelector('#phone-error').classList = 'disp-none';
+    document.querySelector('#phone-verification-container').classList.add('visible');
+    document.querySelector('#phone-input').classList.remove('validation-failed');
+  } else {
+    console.log('warning');
+    document.querySelector('#phone-input').classList.add('validation-failed');
+    document.querySelector('#phone-info').classList = 'disp-none';
+    document.querySelector('#phone-error').classList = 'disp-block';
+
   }
 }

@@ -42,8 +42,8 @@
     </header>
     <div id="email-wrapper" class="mo">
       <label for="email-input">Email address</label>
-      <input type="email" name="email" id="email-input" required> 
-      <div id="email-validation-icon" class="email-none"></div>
+      <input type="email" name="email" id="email-input" class="text-input" required> 
+      <div id="email-validation-icon" class="verif-none"></div>
       <span id="email-info" class="email popup popup-body">You'll use this as your user ID</span>
       <span id="email-arrow" class="email popup popup-arrow"></span>
       <span id="email-error">Please enter a valid email address.</span>
@@ -55,14 +55,21 @@
     <!-- Add pop up when input has focus  -->
     <div id="phone-wrapper" class="mo">
       <label for="phone-input">Phone (recommended)</label>
-      <input type="tel" name="phone" id="phone-input">
+      <input type="tel" name="phone" id="phone-input" class="text-input">
+      <div id="phone-validation-icon" class="verif-none"></div>
       <div id="phone-popout" class="phone popup popup-body">We strongly recommend adding a phone number.  This will help verify your account and keep it safe.</div>
       <div id="phone-arrow" class="phone popup popup-arrow"></div>
-      <span id="tel-info">Standard call, messaging or data rates may apply.</span>
+      <span id="phone-info" class="disp-block">Standard call, messaging or data rates may apply.</span>
+      <div id="phone-warning" class="disp-none">We strongly recommend adding a phone number.  This will help verify your account and keep it safe.</div>
+      <div id="phone-error" class="disp-none">Please enter a valid phone number including area code</div>
+      <div id="phone-verification-container">
+        <input type="checkbox" name="text-verification" id="phone-verification" checked>
+        <label for="phone-verification" id="phone-verification-label">Verify with text message  <i>(most secure)</i></label>
+      </div>
     </div>
     <div id="password-wrapper" class="mo">
       <label for="password-input">Password</label>
-      <input type="password" name="password" id="password-input" required>
+      <input type="password" name="password" id="password-input" class="text-input" required>
       <div id="password-lock-icon"></div>
       <div id="password-popup" class="password popup popup-body">Create a password you've never used before.  This will help keep your account safe.</div>
       <div id="password-arrow" class="password popup popup-arrow"></div>
