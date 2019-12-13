@@ -55,6 +55,9 @@ phoneClick.addEventListener('blur', () => {
   phoneValidate();
 });
 
+phoneClick.addEventListener('keypress', function (e) {
+  return isNumberKey(e)});
+
 const passwordClick = document.getElementById('password-input');
 const passwordFocus = document.querySelectorAll('.password');
 
@@ -135,4 +138,21 @@ function changePhoneStatus(status) {
     document.querySelector('#phone-error').classList = 'disp-block';
 
   }
+}
+
+function isNumberKey(e) {
+  // let charCode = (e.which) ? e.which : event.keyCode;
+  let charCode = e.key
+  // console.log('e.which = ' + e.which + ' event.keyCode = '+event.keyCode);
+  if ((charCode < 48 || charCode > 57)){
+    console.log('true');
+    return true;
+  }
+  console.log('false');
+  return false;
+}
+
+function addPhoneSyntax() {
+  const phoneInput = document.querySelector('#phone-input');
+  console.log(phoneInput.value.length);
 }
