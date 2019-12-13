@@ -55,8 +55,8 @@ phoneClick.addEventListener('blur', () => {
   phoneValidate();
 });
 
-phoneClick.addEventListener('keypress', function (e) {
-  return isNumberKey(e)});
+// phoneClick.addEventListener('keypress', function (e) {
+//   return isNumberKey(e)});
 
 const passwordClick = document.getElementById('password-input');
 const passwordFocus = document.querySelectorAll('.password');
@@ -106,7 +106,8 @@ function changeEmailStatus(status) {
 function phoneValidate() {
   const phone = document.getElementById('phone-input');
   const phoneIcon = document.getElementById('phone-validation-icon');
-  if(phone === document.activeElement) {
+  let phoneFormat = /^\(\d{3}\) \d{3}\-\d{4}$/;
+  if(phone === document.activeElement || phone.value.match(phoneFormat)) {
     //show standard text box and phone number verification
     changePhoneStatus('verif-none');
   } else if(phone.value === '') {
@@ -142,17 +143,73 @@ function changePhoneStatus(status) {
 
 function isNumberKey(e) {
   // let charCode = (e.which) ? e.which : event.keyCode;
-  let charCode = e.key
+  let charCode = e.key;
+  let charThing = e.code;
+
+  // let selectedChar = caret_get_position(e);
+  // console.log(selectedChar)
+
+  let ctl = document.getElementById('phone-input');
+  let startPos = ctl.selectionStart;
+  let endPos = ctl.selectionEnd;
+  console.log(startPos + ", " + endPos);
+
+
+
+  // console.log(charCode);
+  // console.log(charThing);
+  let numberBox = document.getElementById('phone-input');
+  let number = numberBox.value;
+  let newNumber;
+  // console.log(number.length);
   // console.log('e.which = ' + e.which + ' event.keyCode = '+event.keyCode);
   if ((charCode < 48 || charCode > 57)){
-    console.log('true');
+    if(number.length === 3){
+      numberBox.value += '-';
+    } else if(number.length === 8){
+      newNumber = '('+number.slice(0,3)+') '+number.slice(4,7)+'-'+number.slice(7);
+      numberBox.value = newNumber; 
+    }
+    //numberBox.value += charCode;
+    return true;
+  } else if(charCode === 'Backspace'||charCode === 'Delete'){
+    console.log('backspace');
+    if(number.length === 5 && endPos === 5){
+      newNumber = number.slice(0,4);
+      numberBox.value = newNumber;
+    } else if(number.length === 12){
+      newNumber = number.slice(1,4)+'-'+number.slice(6,9)+number.slice(10);
+      numberBox.value = newNumber;
+    }
+    return true;
+  } else if(charCode === 'ArrowLeft' || charCode === 'ArrowRight' || charCode === 'ArrowUp' || charCode === 'ArrowDown'){
     return true;
   }
-  console.log('false');
+  // console.log('false');
   return false;
 }
 
-function addPhoneSyntax() {
-  const phoneInput = document.querySelector('#phone-input');
-  console.log(phoneInput.value.length);
-}
+// var caret_get_position = function(element){
+//   var pos    = 0;
+//   var posEnd = 0;
+//   if('selectionStart' in element){
+//       pos    = element.selectionStart;
+//       posEnd = element.selectionEnd;
+//   }else if('selection' in document){
+//       element.focus();
+//       var Sel       = document.selection.createRange();
+//       var SelLength = document.selection.createRange().text.length;
+//       Sel.moveStart('character', -element.value.length);
+//       pos    = Sel.text.length-SelLength;
+//       posEnd = Sel.text.length;
+//   }
+//   // return both selection start and end;
+//   return [pos, posEnd];
+// };
+
+
+
+// function addPhoneSyntax() {
+//   const phoneInput = document.querySelector('#phone-input');
+//   console.log(phoneInput.value.length);
+// }
