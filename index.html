@@ -73,7 +73,14 @@
       <div id="password-lock-icon"></div>
       <div id="password-popup" class="password popup popup-body">Create a password you've never used before.  This will help keep your account safe.</div>
       <div id="password-arrow" class="password popup popup-arrow"></div>
-      <div id="password-error">test</div>
+      <div id="password-hidden" class="password">
+        <div id="password-length"><span class="validation-failed">×</span> Use 8 or more characters</div>
+        <div id="password-upper-lower"><span class="validation-failed">X</span> Use upper and lower case letters (e.g. Aa)</div>
+        <div id="password-number"><span class="validation-failed">X</span> Use a number (e.g. 1234)</div>
+        <div id="password-symbol"><span class="validation-failed">X</span> Use a symbol (e.g. !@#$)</div>
+        <label for="password-confirmation">Confirm password</label>
+        <input type="password" name="password-confirm" id="password-confirmation" class="text-input" required>
+      </div>
     </div>
     <button name="submit" id="create-account">
       <div id="create-account-lock-img"></div>
