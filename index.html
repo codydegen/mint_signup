@@ -67,18 +67,18 @@
         <label for="phone-verification" id="phone-verification-label">Verify with text message  <i>(most secure)</i></label>
       </div>
     </div>
-    <div id="password-wrapper" class="mo">
+    <div id="password-wrapper" class="mo expanded">
       <label for="password-input">Password</label>
       <input type="password" name="password" id="password-input" class="text-input" required>
       <div id="password-lock-icon"></div>
       <div id="password-popup" class="password popup popup-body">Create a password you've never used before.  This will help keep your account safe.</div>
       <div id="password-arrow" class="password popup popup-arrow"></div>
       <div id="password-hidden" class="password">
-        <div id="password-length"><span class="validation-failed">×</span> Use 8 or more characters</div>
-        <div id="password-upper-lower"><span class="validation-failed">X</span> Use upper and lower case letters (e.g. Aa)</div>
-        <div id="password-number"><span class="validation-failed">X</span> Use a number (e.g. 1234)</div>
-        <div id="password-symbol"><span class="validation-failed">X</span> Use a symbol (e.g. !@#$)</div>
-        <label for="password-confirmation">Confirm password</label>
+        <div id="password-length" class="password-validation"><span class="validation-failed"> </span> Use 8 or more characters</div>
+        <div id="password-upper-lower" class="password-validation"><span class="validation-failed"></span> Use upper and lower case letters (e.g. Aa)</div>
+        <div id="password-number" class="password-validation"><span class="validation-failed"></span> Use a number (e.g. 1234)</div><br>
+        <div id="password-symbol" class="password-validation"><span class="validation-failed"></span> Use a symbol (e.g. !@#$)</div>
+        <label id="password-confirmation-label" for="password-confirmation">Confirm password</label>
         <input type="password" name="password-confirm" id="password-confirmation" class="text-input" required>
       </div>
     </div>

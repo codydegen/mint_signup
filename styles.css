@@ -405,6 +405,22 @@ i {
   display: none;
 }
 
+#password-wrapper {
+  /* height: 200px; */
+  /* display: flex; */
+  /* height: auto; */
+  transition: 2s;
+  /* background: red; */
+}
+
+#password-wrapper.expanded {
+  /* height: 265px; */
+}
+
+#password-confirmation-label {
+  margin-top: 15px;
+}
+
 #password-lock-icon {
   position: absolute;
   top: 28px;
@@ -417,31 +433,53 @@ i {
 
 #password-lock-icon.inprogress {
   background: url(https://plugin.intuitcdn.net/identity-authn-core-ui/images/lock-right-grey@3x-4624f81a.png) no-repeat 0 50%/17px 21px;
-  width: 29px
+  width: 29px;
 }
-}
+
 
 #password-lock-icon.fail {
   background: url(https://plugin.intuitcdn.net/identity-authn-core-ui/images/lock-fail@3x-bd28d810.png) no-repeat 0 50%/21px 21px;
-  width: 33px
+  width: 33px;
 }
 
 #password-lock-icon.success {
   background: url(https://plugin.intuitcdn.net/identity-authn-core-ui/images/lock-success@3x-b1f91dfd.png) no-repeat 0 50%/17px 21px;
-  width: 29px
+  width: 29px;
 }
 
 #password-hidden {
-  height: 20px;
-  margin: 5px 0;
+  /* height: 20px; */
+  margin-top: 5px;
+  margin-bottom: 25px;
   text-align: left;
+  display: none;
+  transition: 2s;
   /* visibility: hidden; */
+}
+
+.password-validation {
+  display: inline-block;
+  height: 14px;
+  color: red;
+  vertical-align: top;
+  /* padding: 5px 0 2px 0; */
 }
 
 #password-hidden.visible {
   visibility: visible;
 }
 
+.validation-failed {
+  display: inline-block;
+  margin-top: 0px;
+  height: 12px;
+  width: 12px;
+  background: url(https://plugin.intuitcdn.net/identity-authn-core-ui/images/small_x_error@4x-92edf365.png) 0 0/9px 10px no-repeat;
+}
+
+.validation-succeeded {
+  background: url(https://plugin.intuitcdn.net/identity-authn-core-ui/images/small_check_success@3x-aeb1ee30.png) 0 0/12px 10px no-repeat;
+}
 
 #create-account {
   width: 318px;
@@ -550,6 +588,7 @@ i {
 
 .mo {
   position: relative;
+  /* display: flex; */
 }
 
 .visible {
