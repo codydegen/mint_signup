@@ -60,20 +60,34 @@ phoneClick.addEventListener('blur', () => {
 
 const passwordClick = document.getElementById('password-input');
 const passwordFocus = document.querySelectorAll('.password');
+const passwordHidden = document.getElementById('password-hidden');
+const passwordWrapper = document.getElementById('password-wrapper');
 
 passwordClick.addEventListener('focus', () => {
   for (let item of passwordFocus) {
     // console.log(item);
     item.classList.add('visible');
+    passwordHidden.classList.remove('visible');
   }
+  // passwordWrapper.classList.toggle('expanded');
+  // passwordHidden.classList.toggle('visible');
 });
+
+passwordWrapper.addEventListener('transitionend', () => {
+  passwordHidden.classList.toggle('visible');
+  console.log('ended event');
+})
 
 passwordClick.addEventListener('blur', () => {
   for (let item of passwordFocus) {
     // console.log(item);
     item.classList.remove('visible');
   }
+  passwordHidden.classList.toggle('visible');
+
 });
+
+passwordClick.addEventListener('keyup', passwordValidate);
 
 function emailValidate() {
   const email = document.getElementById('email-input');
@@ -95,10 +109,10 @@ function emailValidate() {
 function changeEmailStatus(status) {
   document.querySelector('#email-validation-icon').className = 'validation-icon '+ status;
   if(status === 'verif-false') {
-    document.querySelector('#email-input').classList.add('validation-failed');
+    document.querySelector('#email-input').classList.add('validation-border-change');
     document.querySelector('#email-error').classList.add('visible');
   } else {
-    document.querySelector('#email-input').classList.remove('validation-failed');
+    document.querySelector('#email-input').classList.remove('validation-border-change');
     document.querySelector('#email-error').classList.remove('visible');
   }
 }
@@ -125,16 +139,16 @@ function changePhoneStatus(status) {
     document.querySelector('#phone-warning').classList = 'disp-block';
     document.querySelector('#phone-error').classList = 'disp-none';
     document.querySelector('#phone-verification-container').classList.remove('visible');
-    document.querySelector('#phone-input').classList.remove('validation-failed');
+    document.querySelector('#phone-input').classList.remove('validation-border-change');
   } else if(status === 'verif-none') {
     document.querySelector('#phone-info').classList = 'disp-block';
     document.querySelector('#phone-warning').classList = 'disp-none';
     document.querySelector('#phone-error').classList = 'disp-none';
     document.querySelector('#phone-verification-container').classList.add('visible');
-    document.querySelector('#phone-input').classList.remove('validation-failed');
+    document.querySelector('#phone-input').classList.remove('validation-border-change');
   } else {
     console.log('warning');
-    document.querySelector('#phone-input').classList.add('validation-failed');
+    document.querySelector('#phone-input').classList.add('validation-border-change');
     document.querySelector('#phone-info').classList = 'disp-none';
     document.querySelector('#phone-error').classList = 'disp-block';
 
@@ -213,3 +227,28 @@ function isNumberKey(e) {
 //   const phoneInput = document.querySelector('#phone-input');
 //   console.log(phoneInput.value.length);
 // }
+
+function passwordValidate(e) {
+  const passwordInput = document.getElementById('password-input');
+  const passwordContents = passwordInput.value;
+  let passwordCharacteristics = {
+    len: passwordContents.length >= 8,
+    case: passwordCaseCheck(passwordContents),
+    number: passwordNumCheck(passwordContents),
+    symbol: passwordSymbolCheck(passwordContents)
+  };
+  console.log(passwordCharacteristics);
+
+}
+
+function passwordCaseCheck(str) {
+  return (/[a-z]/.test(str) && /[A-Z]/.test(str));
+}
+
+function passwordNumCheck(str) {
+  return (/[0-9]/.test(str));
+}
+
+function passwordSymbolCheck(str) {
+  return (/[~`!#$%\^&*+=\-\[\]\\';,/{}|\\":<>\?]/g.test(str));
+}

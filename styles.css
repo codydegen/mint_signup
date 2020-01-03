@@ -167,7 +167,7 @@ li a:visited {
 }
 
 #product-listing {
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 
 #product-listing li {
@@ -218,6 +218,7 @@ fieldset {
 
 #sign-up-create-account {
   font-size: 24px;
+  line-height: 26px;
 }
 
 #sign-up-header {
@@ -229,6 +230,7 @@ fieldset {
 
 #sign-up-subhed {
   font-size: 14px;
+  line-height: 18px;
   padding-top: 20px;
 }
 
@@ -238,6 +240,7 @@ label {
   font-size: 14px;
   text-align: left;
   display: block;
+  line-height: 25px;
   /* font-size: 1.4em; */
   /* box-shadow: 0,0,0,  */
 }
@@ -275,6 +278,7 @@ label {
 
 #email-error {
   display: block;
+  box-sizing: border-box;
   text-align: left;
   color: #eb3432;
   margin: 5px 0;
@@ -287,13 +291,13 @@ label {
   visibility: visible;
 }
 
-.validation-failed {
+.validation-border-change {
   border-color: red;
 }
 
 .validation-icon {
   position: absolute;
-  top: 29px;
+  top: 33px;
   left: 290px;
   /* background: url(https://plugin.intuitcdn.net/identity-authn-core-ui/images/lock-left-grey@3x-a1ab5bd1.png) no-repeat 0 50%/21px 21px; */
   width: 33px;
@@ -406,24 +410,24 @@ i {
 }
 
 #password-wrapper {
-  /* height: 200px; */
+  height: 85px;
   /* display: flex; */
   /* height: auto; */
-  transition: 2s;
+  transition: 1s;
   /* background: red; */
 }
 
 #password-wrapper.expanded {
-  /* height: 265px; */
+  height: 255px;
 }
 
 #password-confirmation-label {
-  margin-top: 15px;
+  /* margin-top: 15px; */
 }
 
 #password-lock-icon {
   position: absolute;
-  top: 28px;
+  top: 32px;
   left: 288px;
   background: url(https://plugin.intuitcdn.net/identity-authn-core-ui/images/lock-left-grey@3x-a1ab5bd1.png) no-repeat 0 50%/21px 21px;
   width: 33px;
@@ -449,29 +453,56 @@ i {
 
 #password-hidden {
   /* height: 20px; */
-  margin-top: 5px;
+  /* margin-top: 8px; */
   margin-bottom: 25px;
   text-align: left;
   display: none;
-  transition: 2s;
+  transition: 0.1s;
+  display: inline-block;
   /* visibility: hidden; */
+  line-height: 1;
 }
 
 .password-validation {
   display: inline-block;
-  height: 14px;
+  height: 18px;
+  padding: 2px 0;
   color: red;
+  vertical-align: text-top;
+  font-size: .95em;
+}
+
+.password-validation.inprogress {
+  color: #7d7d7d;
+}
+
+.password-child {
+  display: inline-block;
+  height: 14px;
   vertical-align: top;
-  /* padding: 5px 0 2px 0; */
+  padding-left: 5px;
+  color: inherit;
 }
 
 #password-hidden.visible {
   visibility: visible;
+  display: block;
+}
+
+#password-input {
+  margin-bottom: 10px;
+}
+
+.validation-first-click {
+  background: url(https://plugin.intuitcdn.net/identity-authn-core-ui/images/small_x_grey@4x-063fc46e.png) 0 0/9px 10px no-repeat;
+  height: 12px;
+  width: 12px;
+  display: inline-block;
 }
 
 .validation-failed {
   display: inline-block;
-  margin-top: 0px;
+  /* margin-top: 2px; */
   height: 12px;
   width: 12px;
   background: url(https://plugin.intuitcdn.net/identity-authn-core-ui/images/small_x_error@4x-92edf365.png) 0 0/9px 10px no-repeat;
@@ -486,7 +517,7 @@ i {
   height: 44px;
   font-size: 15.75px;
   padding: 6px 12px;
-  margin-bottom: 30px;
+  margin-bottom: 41px;
   border: #0077c5;
   box-shadow: 0 1px 1px 0 rgba(0,0,0,0.75);
 }
@@ -508,7 +539,7 @@ i {
   font-size: 10px;
   color: #8d9096;
   /* border: 1px black solid; */
-  padding: 16px;
+  padding: 19px 16px;
   /* width: 398px;
   border-top-width: 0;
   border-color: rgb(199, 199, 199); */
@@ -593,7 +624,14 @@ i {
 
 .visible {
   visibility: visible;
+}
 
+#create-account-info {
+  color: #757575;
+  /* font-size: 14px; */
+  font-style: italic;
+  padding: 0 20px;
+  line-height: 20px;
 }
 
 /* .mo:focus-within:after {
