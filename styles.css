@@ -213,6 +213,7 @@ fieldset {
   display: flex;
   font-family: AvenirNext,Avenir,Helvetica Neue,Helvetica,Arial,sans-serif;
   padding: 30px;
+  padding-bottom: 33px;
   
 }
 
@@ -295,15 +296,15 @@ label {
   border-color: red;
 }
 
-/* .validation-icon {
+.validation-icon {
   position: absolute;
   top: 33px;
   left: 290px;
-  // background: url(https://plugin.intuitcdn.net/identity-authn-core-ui/images/lock-left-grey@3x-a1ab5bd1.png) no-repeat 0 50%/21px 21px;
+  /* background: url(https://plugin.intuitcdn.net/identity-authn-core-ui/images/lock-left-grey@3x-a1ab5bd1.png) no-repeat 0 50%/21px 21px; */
   width: 33px;
   height: 30px;
-  // background: white;
-} */
+  /* background: white; */
+}
 
 .verif-none {
   background: none;
@@ -334,7 +335,7 @@ label {
   display: none;
   position: relative;
   text-align: left;
-  padding-bottom: 30px;
+  padding: 20px 0;
 }
 
 #phone-verification-container.visible {
@@ -363,7 +364,7 @@ label {
   box-sizing: border-box;
   font-size: 14px;
   position: absolute;
-  top: 7px;
+  top: 29px;
   left: 4px;
   border-color: #00b100;
   transform: rotate(-45deg);
@@ -386,8 +387,10 @@ i {
 
 #phone-warning {
   color: #ea7f00;
-  font-size: 14px;
+  font-size: 12px;
+  line-height: 1.2;
   text-align: left;
+  margin: 5px 0;
   /* display: none; */
 }
 
@@ -410,19 +413,37 @@ i {
 }
 
 #password-wrapper {
-  height: 85px;
+  height: 95px;
   /* display: flex; */
   /* height: auto; */
-  transition: 1s;
+  transition: 0.8s;
   /* background: red; */
 }
 
 #password-wrapper.expanded {
-  height: 255px;
+  height: 274px;
+}
+
+#password-wrapper.expanded.max-length {
+  height: 305px;
+}
+
+#password-wrapper.expanded.valid-password {
+  height: 99px;
 }
 
 #password-confirmation-label {
   margin-top: 15px;
+}
+
+#password-confirmation-error {
+    /* display: block; */
+    text-align: left;
+    color: #eb3432;
+    margin: 5px 0;
+    /* visibility: hidden; */
+    line-height: 1.2em;
+    height: 20px;
 }
 
 #password-lock-icon {
@@ -433,6 +454,24 @@ i {
   width: 33px;
   height: 30px;
   /* background: white; */
+}
+
+#password-confirmation-lock-icon {
+  position: absolute;
+  top: 210px;
+  left: 288px;
+  /* background: url(https://plugin.intuitcdn.net/identity-authn-core-ui/images/lock-left-grey@3x-a1ab5bd1.png) no-repeat 0 50%/21px 21px; */
+  width: 33px;
+  height: 30px;
+}
+
+#password-confirmation-lock-icon.max-length {
+  /* password-confirmation-lock-icon top + (password-wrapper.expanded.max-length - password-wrapper.expanded */
+  top: 229px;
+}
+
+#password-confirmation-lock-icon.succeeded {
+  top: 151px;
 }
 
 #password-lock-icon.inprogress {
@@ -461,9 +500,16 @@ i {
   /* display: inline-block; */
   /* visibility: hidden; */
   line-height: 1;
+  /* vertical-align: top; */
 }
 
-
+#password-validation-success {
+  color: #51aa4d;
+  position: absolute;
+  top: 30%;
+  /* display: inline; */
+  /* vertical-align: top; */
+}
 
 .password-validation {
   display: inline-block;
@@ -472,6 +518,11 @@ i {
   color: red;
   vertical-align: text-top;
   font-size: .95em;
+}
+
+.password-validation.disp-none,
+#password-confirmation-error.disp-none {
+  display: none;
 }
 
 .hidden {
@@ -503,7 +554,7 @@ i {
   margin-bottom: 10px;
 }
 
-.validation-icon {
+.password-validation-icon {
   display: inline-block;
   /* margin-top: 2px; */
   height: 12px;
@@ -511,14 +562,14 @@ i {
   background: url(https://plugin.intuitcdn.net/identity-authn-core-ui/images/small_x_error@4x-92edf365.png) 0 0/9px 10px no-repeat;
 }
 
-.validation-icon.first-click {
+.password-validation-icon.first-click {
   background: url(https://plugin.intuitcdn.net/identity-authn-core-ui/images/small_x_grey@4x-063fc46e.png) 0 0/9px 10px no-repeat;
   height: 12px;
   width: 12px;
   display: inline-block;
 }
 
-.validation-icon.succeeded {
+.password-validation-icon.succeeded {
   background: url(https://plugin.intuitcdn.net/identity-authn-core-ui/images/small_check_success@3x-aeb1ee30.png) 0 0/12px 10px no-repeat;
 }
 
@@ -529,7 +580,7 @@ i {
   height: 44px;
   font-size: 15.75px;
   padding: 6px 12px;
-  margin-bottom: 41px;
+  margin-bottom: 42px;
   border: #0077c5;
   box-shadow: 0 1px 1px 0 rgba(0,0,0,0.75);
 }
@@ -643,7 +694,7 @@ i {
   /* font-size: 14px; */
   font-style: italic;
   padding: 0 20px;
-  line-height: 20px;
+  line-height: 19px;
 }
 
 /* .mo:focus-within:after {
@@ -709,6 +760,7 @@ footer {
 
 #footer-items li {
   display: inline-block;
+  padding-top: 5px;
 }
 
 

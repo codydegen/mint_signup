@@ -64,23 +64,25 @@
       <div id="phone-error" class="disp-none">Please enter a valid phone number including area code</div>
       <div id="phone-verification-container">
         <input type="checkbox" name="text-verification" id="phone-verification" checked>
-        <label for="phone-verification" id="phone-verification-label">Verify with text message  <i>(most secure)</i></label>
+        <label for="phone-verification" id="phone-verification-label">Verify with text message   <i> (most secure)</i></label>
       </div>
     </div>
-    <div id="password-wrapper" class="mo expanded">
+    <div id="password-wrapper" class="mo">
       <label for="password-input">Password</label>
       <input type="password" name="password" id="password-input" class="text-input" required>
-      <div id="password-lock-icon"></div>
+      <div id="password-lock-icon" class="password-lock"></div>
       <div id="password-popup" class="password popup popup-body">Create a password you've never used before.  This will help keep your account safe.</div>
       <div id="password-arrow" class="password popup popup-arrow"></div>
-      <div id="password-hidden" class="password">
-        <div id="password-length" class="password-validation first-click"><span class="validation-icon first-click"></span><div class="password-child first-click">Use 8 or more characters</div></div>
-        <div id="password-upper-lower" class="password-validation first-click"><span class="validation-icon first-click"></span><div class="password-child first-click">Use upper and lower case letters (e.g. Aa)</div></div>
-        <div id="password-number" class="password-validation first-click"><span class="validation-icon first-click"></span><div class="password-child first-click">Use a number (e.g. 1234)</div></div><br>
-        <div id="password-symbol" class="password-validation first-click"><span class="validation-icon first-click"></span><div class="password-child first-click">Use a symbol (e.g. !@#$)</div></div>
-        <div id="password-max-length" class="password-validation hidden"><span class="validation-icon"></span><div class="password-child">Password length cannot exceed 32 characters</div></div>
+      <div id="password-hidden" class="">
+        <div id="password-length" class="password-validation first-click"><span class="password-validation-icon first-click"></span><div class="password-child first-click">Use 8 or more characters</div></div>
+        <div id="password-upper-lower" class="password-validation first-click"><span class="password-validation-icon first-click"></span><div class="password-child first-click">Use upper and lower case letters (e.g. Aa)</div></div>
+        <div id="password-number" class="password-validation first-click"><span class="password-validation-icon first-click"></span><div class="password-child first-click">Use a number (e.g. 1234)</div></div><br>
+        <div id="password-symbol" class="password-validation first-click"><span class="password-validation-icon first-click"></span><div class="password-child first-click">Use a symbol (e.g. !@#$)</div></div>
+        <div id="password-max-length" class="password-validation hidden"><span class="password-validation-icon"></span><div class="password-child">Password length cannot exceed 32 characters</div></div>
+        <div id="password-validation-success" class="disp-none">Your password is STRONG.</div>
         <label id="password-confirmation-label" for="password-confirmation">Confirm password</label>
         <input type="password" name="password-confirm" id="password-confirmation" class="text-input" required>
+        <div id="password-confirmation-lock-icon" class="password-lock"></div>
         <div id="password-confirmation-error" class="disp-none">Confirm password field does not match the password field.</div>
       </div>
     </div>
@@ -103,7 +105,7 @@
       <li><a href="https://security.intuit.com/">Security</a></li>
     </ul>
   </nav>
-  <p id="copyright">© 2019 Intuit, Inc. All rights reserved. Intuit, QuickBooks, QB, TurboTax, ProConnect and Mint are registered trademarks of Intuit Inc.
+  <p id="copyright">© 2020 Intuit, Inc. All rights reserved. Intuit, QuickBooks, QB, TurboTax, ProConnect and Mint are registered trademarks of Intuit Inc.
       Terms and conditions, features, support, pricing, and service options subject to change without notice.</p>
 </footer>
 
