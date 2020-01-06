@@ -295,15 +295,15 @@ label {
   border-color: red;
 }
 
-.validation-icon {
+/* .validation-icon {
   position: absolute;
   top: 33px;
   left: 290px;
-  /* background: url(https://plugin.intuitcdn.net/identity-authn-core-ui/images/lock-left-grey@3x-a1ab5bd1.png) no-repeat 0 50%/21px 21px; */
+  // background: url(https://plugin.intuitcdn.net/identity-authn-core-ui/images/lock-left-grey@3x-a1ab5bd1.png) no-repeat 0 50%/21px 21px;
   width: 33px;
   height: 30px;
-  /* background: white; */
-}
+  // background: white;
+} */
 
 .verif-none {
   background: none;
@@ -422,7 +422,7 @@ i {
 }
 
 #password-confirmation-label {
-  /* margin-top: 15px; */
+  margin-top: 15px;
 }
 
 #password-lock-icon {
@@ -458,10 +458,12 @@ i {
   text-align: left;
   display: none;
   transition: 0.1s;
-  display: inline-block;
+  /* display: inline-block; */
   /* visibility: hidden; */
   line-height: 1;
 }
+
+
 
 .password-validation {
   display: inline-block;
@@ -472,8 +474,8 @@ i {
   font-size: .95em;
 }
 
-.password-validation.inprogress {
-  color: #7d7d7d;
+.hidden {
+  display: none;
 }
 
 .password-child {
@@ -482,6 +484,14 @@ i {
   vertical-align: top;
   padding-left: 5px;
   color: inherit;
+}
+
+.password-child.first-click {
+  color: #7d7d7d;
+}
+
+.password-child.succeeded {
+  color: #51aa4d;
 }
 
 #password-hidden.visible {
@@ -493,14 +503,7 @@ i {
   margin-bottom: 10px;
 }
 
-.validation-first-click {
-  background: url(https://plugin.intuitcdn.net/identity-authn-core-ui/images/small_x_grey@4x-063fc46e.png) 0 0/9px 10px no-repeat;
-  height: 12px;
-  width: 12px;
-  display: inline-block;
-}
-
-.validation-failed {
+.validation-icon {
   display: inline-block;
   /* margin-top: 2px; */
   height: 12px;
@@ -508,9 +511,18 @@ i {
   background: url(https://plugin.intuitcdn.net/identity-authn-core-ui/images/small_x_error@4x-92edf365.png) 0 0/9px 10px no-repeat;
 }
 
-.validation-succeeded {
+.validation-icon.first-click {
+  background: url(https://plugin.intuitcdn.net/identity-authn-core-ui/images/small_x_grey@4x-063fc46e.png) 0 0/9px 10px no-repeat;
+  height: 12px;
+  width: 12px;
+  display: inline-block;
+}
+
+.validation-icon.succeeded {
   background: url(https://plugin.intuitcdn.net/identity-authn-core-ui/images/small_check_success@3x-aeb1ee30.png) 0 0/12px 10px no-repeat;
 }
+
+
 
 #create-account {
   width: 318px;

@@ -62,12 +62,13 @@ const passwordClick = document.getElementById('password-input');
 const passwordFocus = document.querySelectorAll('.password');
 const passwordHidden = document.getElementById('password-hidden');
 const passwordWrapper = document.getElementById('password-wrapper');
+const passwordFirstClick = document.querySelectorAll('.first-click');
 
 passwordClick.addEventListener('focus', () => {
   for (let item of passwordFocus) {
     // console.log(item);
     item.classList.add('visible');
-    passwordHidden.classList.remove('visible');
+    passwordHidden.classList.add('visible');
   }
   // passwordWrapper.classList.toggle('expanded');
   // passwordHidden.classList.toggle('visible');
@@ -81,9 +82,13 @@ passwordWrapper.addEventListener('transitionend', () => {
 passwordClick.addEventListener('blur', () => {
   for (let item of passwordFocus) {
     // console.log(item);
-    item.classList.remove('visible');
+    // item.classList.remove('visible');
   }
-  passwordHidden.classList.toggle('visible');
+
+  for (let item of passwordFirstClick) {
+    item.classList.remove('first-click');
+  }
+  // passwordHidden.classList.toggle('visible');
 
 });
 
@@ -231,24 +236,83 @@ function isNumberKey(e) {
 function passwordValidate(e) {
   const passwordInput = document.getElementById('password-input');
   const passwordContents = passwordInput.value;
-  let passwordCharacteristics = {
-    len: passwordContents.length >= 8,
-    case: passwordCaseCheck(passwordContents),
-    number: passwordNumCheck(passwordContents),
-    symbol: passwordSymbolCheck(passwordContents)
-  };
-  console.log(passwordCharacteristics);
+  let passwordStatus = {
+    len: passwordLengthChange(passwordContents),
+    case: passwordCaseChange(passwordContents),
+    num: passwordNumChange(passwordContents),
+    symbol: passwordSymbolChange(passwordContents),
+    maxLen: passwordContents.length >= 32 ? false : true
+  }
+  console.log(passwordStatus);
+  // };
+  //console.log(passwordCharacteristics);
 
 }
 
-function passwordCaseCheck(str) {
-  return (/[a-z]/.test(str) && /[A-Z]/.test(str));
+function passwordLengthChange(str) {
+  const pw = document.getElementById('password-length').childNodes;
+  const pwMaxLength = document.getElementById('password-max-length');
+  if (str.length >= 8) {
+    for(let item of pw) {
+      item.classList.add('succeeded');
+    }
+    if (str.length >= 32) {
+      //adjust max length thing
+        pwMaxLength.classList.remove('hidden');
+    } else {
+      pwMaxLength.classList.add('hidden');
+    }
+    return true;
+  } else {
+    for(let item of pw){
+      item.classList.remove('succeeded');
+    }
+    return false;
+  }
+
 }
 
-function passwordNumCheck(str) {
-  return (/[0-9]/.test(str));
+function passwordCaseChange(str) {
+  const pw = document.getElementById('password-upper-lower').childNodes;
+  if (/[a-z]/.test(str) && /[A-Z]/.test(str)) {
+    for(let item of pw){
+      item.classList.add('succeeded');
+    }
+    return true;
+  } else {
+    for (let item of pw) {
+      item.classList.remove('succeeded');
+    }
+    return false;
+  }
 }
 
-function passwordSymbolCheck(str) {
-  return (/[~`!#$%\^&*+=\-\[\]\\';,/{}|\\":<>\?]/g.test(str));
+function passwordNumChange(str) {
+  const pw = document.getElementById('password-number').childNodes;
+  if (/[0-9]/.test(str)) {
+    for(let item of pw){
+    item.classList.add('succeeded');
+    }
+    return true;
+  } else {
+    for (let item of pw) {
+      item.classList.remove('succeeded');
+    }
+    return false;
+  }
+}
+
+function passwordSymbolChange(str) {
+  const pw = document.getElementById('password-symbol').childNodes;
+  if (/[~`!@#$%\^&*+=\-\[\]\\';,/{}|\\":<>\?]/g.test(str)) {
+    for(let item of pw){
+      item.classList.add('succeeded');
+    }
+    return true;
+  } else {
+    for (let item of pw) {
+      item.classList.remove('succeeded');
+    }
+    return false;
+  }
 }
