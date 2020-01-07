@@ -184,9 +184,10 @@ function isNumberKey(e) {
   // console.log(selectedChar)
 
   let ctl = document.getElementById('phone-input');
+  //console.log('strippedNumber')
   let startPos = ctl.selectionStart;
   let endPos = ctl.selectionEnd;
-  //console.log(startPos + ", " + endPos);
+  
 
 
 
@@ -194,32 +195,156 @@ function isNumberKey(e) {
   // console.log(charThing);
   let numberBox = document.getElementById('phone-input');
   let number = numberBox.value;
+  let newLength;
+  let selectedString = number.slice(startPos,endPos);
+  console.log(startPos + ", " + endPos);
+  console.log('selected: '+number.slice(startPos,endPos));
+  if(charCode === 'Backspace' || charCode === 'Delete'){
+    newLength = -1;
+  } else if(charCode === 'ArrowLeft' || charCode === 'ArrowRight' || charCode === 'ArrowUp' || charCode === 'ArrowDown') {
+    newLength = 0;
+  } else {
+    newLength = 1;
+  }
+  if(newLength === -1){
+    if(selectedString.length > 0){
+    number = number.replace(selectedString, '');
+    console.log('removed substring '+selectedString);
+    //return false;
+    }
+  }
   let newNumber;
-  // console.log(number.length);
-  // console.log('e.which = ' + e.which + ' event.keyCode = '+event.keyCode);
-  if ((charCode < 48 || charCode > 57)){
-    if(number.length === 3){
-      numberBox.value += '-';
-    } else if(number.length === 8){
-      newNumber = '('+number.slice(0,3)+') '+number.slice(4,7)+'-'+number.slice(7);
-      numberBox.value = newNumber; 
+  let strippedNumber = number.replace(/[\(\)\s\-]/g, '');
+  console.log(strippedNumber);
+  if((charCode < 48 || charCode > 57)){
+    if(strippedNumber.length < 3){
+      numberBox.value = strippedNumber;
     }
-    //numberBox.value += charCode;
-    return true;
-  } else if(charCode === 'Backspace'||charCode === 'Delete'){
-    //console.log('backspace');
-    if(number.length === 5 && endPos === 5){
-      newNumber = number.slice(0,4);
-      numberBox.value = newNumber;
-    } else if(number.length === 12){
-      newNumber = number.slice(1,4)+'-'+number.slice(6,9)+number.slice(10);
-      numberBox.value = newNumber;
+    else if(strippedNumber.length === 3){
+      numberBox.value = strippedNumber += '-';
+    } else if(strippedNumber.length === 7) {
+      numberBox.value = '('+strippedNumber.slice(0,3)+') '+strippedNumber.slice(3,6)+'-'+strippedNumber.slice(6);
     }
     return true;
+  } else if(newLength === -1) {
+
+    // if(strippedNumber.length )
   } else if(charCode === 'ArrowLeft' || charCode === 'ArrowRight' || charCode === 'ArrowUp' || charCode === 'ArrowDown'){
     return true;
   }
+  return false;
+  console.log(strippedNumber);
+  // console.log(number.length);
+  // console.log('e.which = ' + e.which + ' event.keyCode = '+event.keyCode);
+  
+  
+  
+  // if ((charCode < 48 || charCode > 57)){
+  //   if(number.length === 3){
+  //     numberBox.value += '-';
+  //   } else if(number.length === 8){
+  //     newNumber = '('+number.slice(0,3)+') '+number.slice(4,7)+'-'+number.slice(7);
+  //     numberBox.value = newNumber; 
+  //   }
+  //   //numberBox.value += charCode;
+  //   return true;
+  // } else if(charCode === 'Backspace'||charCode === 'Delete'){
+  //   //console.log('backspace');
+  //   if(number.length === 5 && endPos === 5){
+  //     newNumber = number.slice(0,4);
+  //     numberBox.value = newNumber;
+  //   } else if(number.length === 12){
+  //     newNumber = number.slice(1,4)+'-'+number.slice(6,9)+number.slice(10);
+  //     numberBox.value = newNumber;
+  //   }
+  //   return true;
+
+
+
+//  /*}*/ else if(charCode === 'ArrowLeft' || charCode === 'ArrowRight' || charCode === 'ArrowUp' || charCode === 'ArrowDown'){
+    return true;
+ // }
   // console.log('false');
+  return false;
+}
+
+
+function isNumberKeyNew(e) {
+  // Identify whether characters are being added or subtracted or just moved
+  let charCode = e.key;
+  // console.log(charCode);
+  let ctl = document.getElementById('phone-input');
+  let startPos = ctl.selectionStart;
+  let endPos = ctl.selectionEnd;
+  const numberBox = document.getElementById('phone-input');
+  let rawNumber = numberBox.value;
+  let input = String.fromCharCode(charCode);
+  let newLength;
+  let selectedString = rawNumber.slice(startPos,endPos);
+  let outputNumber;
+  if(charCode === 'Backspace' || charCode === 'Delete'){
+    newLength = -1;
+  } else if(charCode === 'ArrowLeft' || charCode === 'ArrowRight' || charCode === 'ArrowUp' || charCode === 'ArrowDown' || charCode === 'Tab'){
+    newLength = 0;
+    return true;
+  } else {
+    if((charCode < 10)){
+      console.log(charCode)
+      newLength = 1;
+    } else {
+      return false;
+    }
+    // newLength = 1;
+  }
+  //console.log(charCode);
+  //Handle selected string replacement
+  if(selectedString.length > 0) {
+    if(newLength === 1){
+      rawNumber = rawNumber.slice(0, startPos)+charCode+rawNumber.slice(endPos);
+    } else {
+      rawNumber = rawNumber.replace(selectedString,'');
+    }
+  } else {
+    if(newLength === 1){
+      if(startPos === rawNumber.length){
+      rawNumber += charCode;
+      } else {
+        rawNumber = rawNumber.slice(0,startPos) + charCode + rawNumber.slice(startPos);
+      }
+    } else if (charCode === 'Backspace') {
+      if(startPos !== 0){  
+        rawNumber = rawNumber.slice(0,startPos-1)+rawNumber.slice(startPos);
+      }
+    } else if (charCode === 'Delete') {
+      if(startPos !== rawNumber.length){
+        rawNumber = rawNumber.slice(0,startPos) + rawNumber.slice(startPos+1);
+      }
+    }
+  }
+  console.log('rawNumber '+rawNumber);
+  // Place raw number
+  let strippedNumber = rawNumber.replace(/[\(\)\s\-]/g, '');
+  // Clean raw number
+  console.log('strippedNumber '+strippedNumber);
+  if(strippedNumber.length < 3) {
+    outputNumber = strippedNumber;
+  } else if(strippedNumber.length === 3 && charCode === 'Backspace' && startPos === 3){
+    outputNumber = strippedNumber;
+  } else if(strippedNumber.length === 3){
+    outputNumber = strippedNumber + '-';
+  } else if(strippedNumber.length <8 && strippedNumber > 3){
+    outputNumber = strippedNumber.slice(0,3)+'-'+strippedNumber.slice(3);
+  } else if(strippedNumber.length <= 10) {
+    outputNumber = '('+strippedNumber.slice(0,3)+') '+strippedNumber.slice(3,6)+'-'+strippedNumber.slice(6);
+  } else {
+    outputNumber = strippedNumber;
+  }
+
+
+
+
+  console.log('outputNumber '+outputNumber);
+  numberBox.value = outputNumber;
   return false;
 }
 
