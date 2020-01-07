@@ -276,7 +276,9 @@ function isNumberKeyNew(e) {
   let ctl = document.getElementById('phone-input');
   let startPos = ctl.selectionStart;
   let endPos = ctl.selectionEnd;
+  let locUpdate = 1;
   const numberBox = document.getElementById('phone-input');
+  let previousNumber = numberBox.value;
   let rawNumber = numberBox.value;
   let input = String.fromCharCode(charCode);
   let newLength;
@@ -324,27 +326,49 @@ function isNumberKeyNew(e) {
   console.log('rawNumber '+rawNumber);
   // Place raw number
   let strippedNumber = rawNumber.replace(/[\(\)\s\-]/g, '');
-  // Clean raw number
+  // format stripped number
   console.log('strippedNumber '+strippedNumber);
   if(strippedNumber.length < 3) {
     outputNumber = strippedNumber;
-  } else if(strippedNumber.length === 3 && charCode === 'Backspace' && startPos === 3){
+  } else if(strippedNumber.length === 3 && ((charCode === 'Backspace' && startPos === 4) || (charCode === 'Delete' && startPos === 3))){
     outputNumber = strippedNumber;
   } else if(strippedNumber.length === 3){
     outputNumber = strippedNumber + '-';
+    locUpdate++;
   } else if(strippedNumber.length <8 && strippedNumber > 3){
     outputNumber = strippedNumber.slice(0,3)+'-'+strippedNumber.slice(3);
+    locUpdate++;
   } else if(strippedNumber.length <= 10) {
     outputNumber = '('+strippedNumber.slice(0,3)+') '+strippedNumber.slice(3,6)+'-'+strippedNumber.slice(6);
+    switch (true) {
+      case (startPos === 0):
+        locUpdate = 0;
+        break;
+      case (startPos < 4):
+        locUpdate = 1;
+        break;
+      case (startPos < 6):
+        locUpdate = 2;
+        break;
+      case (startPos < 10):
+        locUpdate = 4;
+        break;
+      default:
+        locUpdate = 5;
+        break;
+    }
   } else {
+    
     outputNumber = strippedNumber;
   }
 
-
-
+  let preString = previousNumber.slice(0,startPos);
+  let postString = previousNumber.slice(endPos);
+  console.log('pre: '+preString+', post: '+postString);
 
   console.log('outputNumber '+outputNumber);
   numberBox.value = outputNumber;
+  // setCaretPosition('phone-input', startPos+locUpdate);
   return false;
 }
 
@@ -594,5 +618,24 @@ function passwordValidate(e) {
       // passwordConfirmation.classList.add('validation-border-change');
     }
   }
+}
 
+function setCaretPosition(elemId, caretPos) {
+  var elem = document.getElementById(elemId);
+
+  if(elem != null) {
+      if(elem.createTextRange) {
+          var range = elem.createTextRange();
+          range.move('character', caretPos);
+          range.select();
+      }
+      else {
+          if(elem.selectionStart) {
+              elem.focus();
+              elem.setSelectionRange(caretPos, caretPos);
+          }
+          else
+              elem.focus();
+      }
+  }
 }
