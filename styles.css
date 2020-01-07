@@ -428,8 +428,8 @@ i {
   height: 305px;
 }
 
-#password-wrapper.expanded.valid-password {
-  height: 99px;
+#password-wrapper.expanded.validpw {
+  height: 214px;
 }
 
 #password-confirmation-label {
@@ -471,7 +471,11 @@ i {
 }
 
 #password-confirmation-lock-icon.succeeded {
-  top: 151px;
+  top: 151x;
+}
+
+#password-confirmation-lock-icon.validpw {
+  top: 150px;
 }
 
 #password-lock-icon.inprogress {
@@ -509,6 +513,10 @@ i {
   top: 30%;
   /* display: inline; */
   /* vertical-align: top; */
+}
+
+#password-validation-success {
+  top: 40%;
 }
 
 .password-validation {
@@ -649,7 +657,7 @@ i {
   margin-top: 0;
   left: 100%;
   width: 220px;
-  top: 27px;
+  top: 31px;
   padding: 10px 20px;
   color: white;
   border-radius: 4px;
@@ -658,13 +666,13 @@ i {
   text-align: left;
 }
 
-#email-popout {
-  bottom: 35px;
-}
+/* #email-popout {
+  bottom: 33px;
+} */
 
 #email-arrow {
   position: absolute;
-  bottom: 32px;
+  bottom: 34px;
 }
 
 #phone-wrapper {
@@ -673,14 +681,14 @@ i {
 
 #phone-arrow {
   position: absolute;
-  bottom: 60px;
+  bottom: 104px;
 }
 
 #password-arrow {
-  bottom: 25px;
+  bottom: 34px;
 }
 
-.mo {
+.rel {
   position: relative;
   /* display: flex; */
 }
