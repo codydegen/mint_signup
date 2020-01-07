@@ -74,13 +74,17 @@ passwordClick.addEventListener('focus', e => {
     passwordWrapper.classList.add('expanded');
   }
   passwordLockIconChangeSelect(e.type);
+  const passwordConfirmation = document.getElementById('password-confirmation');
+  if(passwordConfirmation.value.length > 0) {
+    passwordConfirmationFocus();
+  }
   // passwordWrapper.classList.toggle('expanded');
   // passwordHidden.classList.toggle('visible');
 });
 
 passwordWrapper.addEventListener('transitionend', () => {
   passwordHidden.classList.add('visible');
-  console.log('ended event');
+  //console.log('ended event');
 })
 
 passwordClick.addEventListener('blur', e => {
@@ -93,15 +97,25 @@ passwordClick.addEventListener('blur', e => {
     item.classList.remove('first-click');
   }
   passwordLockIconChangeSelect(e.type);
+  const passwordConfirmation = document.getElementById('password-confirmation');
+  if(passwordConfirmation.value.length > 0) {
+    passwordConfirmationBlur();
+  }
   // passwordHidden.classList.toggle('visible');
 
 });
 
-passwordClick.addEventListener('keyup', passwordValidate);
+passwordClick.addEventListener('keyup', e => {
+  passwordValidateBoth(e);
+  // const passwordConfirmationIcon = document.getElementById('password-confirmation-lock-icon');
+  // if(passwordConfirmationIcon.classList.contains('verif-true') || passwordConfirmationIcon.classList.contains('verif-false')){
+  //   passwordConfirmationValidate();
+  // }
+});
 
 function emailValidate() {
   const email = document.getElementById('email-input');
-  console.log(email);
+  //console.log(email);
   let mailFormat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,256})+$/
   if((email.value === '') || (email === document.activeElement)) {
     changeEmailStatus('verif-none');
@@ -157,7 +171,7 @@ function changePhoneStatus(status) {
     document.querySelector('#phone-verification-container').classList.add('visible');
     document.querySelector('#phone-input').classList.remove('validation-border-change');
   } else {
-    console.log('warning');
+    //console.log('warning');
     document.querySelector('#phone-input').classList.add('validation-border-change');
     document.querySelector('#phone-info').classList = 'disp-none';
     document.querySelector('#phone-error').classList = 'disp-block';
@@ -176,7 +190,7 @@ function isNumberKey(e) {
   let ctl = document.getElementById('phone-input');
   let startPos = ctl.selectionStart;
   let endPos = ctl.selectionEnd;
-  console.log(startPos + ", " + endPos);
+  //console.log(startPos + ", " + endPos);
 
 
 
@@ -197,7 +211,7 @@ function isNumberKey(e) {
     //numberBox.value += charCode;
     return true;
   } else if(charCode === 'Backspace'||charCode === 'Delete'){
-    console.log('backspace');
+    //console.log('backspace');
     if(number.length === 5 && endPos === 5){
       newNumber = number.slice(0,4);
       numberBox.value = newNumber;
@@ -239,6 +253,7 @@ function isNumberKey(e) {
 // }
 
 function passwordValidate(e) {
+  alert('dead code passwordValidate');
   const passwordInput = document.getElementById('password-input');
   const passwordContents = passwordInput.value;
   let passwordStatus = {
@@ -255,7 +270,8 @@ function passwordValidate(e) {
     }
   }
   passwordLockIconChangeKeyPress(passwordCorrect);
-  console.log(passwordStatus);
+  //passwordValidateBoth(e);
+  //console.log(passwordStatus);
   // };
   //console.log(passwordCharacteristics);
 
@@ -379,14 +395,14 @@ function passwordLockIconChangeSelect(event) {
   const passwordIcon = document.getElementById('password-lock-icon');
   const pwClassList = passwordIcon.classList;
   const passwordBorder = document.getElementById('password-input');
-  console.log(pwClassList);
+  //console.log(pwClassList);
   if(event === 'blur' && pwClassList.value !== 'success') {
     passwordIcon.classList = 'fail';
     passwordBorder.classList.add('validation-border-change');
   } else if(event === 'focus' && pwClassList.value !== 'success') {
     passwordIcon.classList = 'inprogress';
   }
-  console.log(pwClassList);
+  //console.log(pwClassList);
 }
 const passwordConfirmationClick = document.getElementById('password-confirmation');
 
@@ -398,20 +414,25 @@ passwordConfirmationClick.addEventListener('blur', () => {
   passwordConfirmationBlur();
 });
 
-passwordConfirmationClick.addEventListener('keyup', passwordConfirmationValidate);
+passwordConfirmationClick.addEventListener('keyup', passwordValidateBoth);
 
-function passwordConfirmationValidate() {
+function passwordConfirmationValidate(e) {
+  //passwordValidateBoth(e);
+  alert('dead code');
   const passwordConfirmation = document.getElementById('password-confirmation');
   const password = document.getElementById('password-input');
   const passwordConfirmationIcon = document.getElementById('password-confirmation-lock-icon');
   const passwordConfirmationError = document.getElementById('password-confirmation-error');
-  console.log(passwordConfirmation.value, password.value);
+  //console.log(e);
+  //console.log(passwordConfirmation.value, password.value);
   if(password.value === passwordConfirmation.value) {
     passwordConfirmationIcon.classList.add('verif-true');
+    passwordConfirmationIcon.classList.remove('verif-false');
     passwordConfirmationError.classList = 'disp-none';
     passwordConfirmation.classList.remove('validation-border-change');
   } else {
     passwordConfirmationIcon.classList.remove('verif-true');
+    
     passwordConfirmation.classList.add('validation-border-change');
   }
 }
@@ -419,6 +440,8 @@ function passwordConfirmationValidate() {
 function passwordConfirmationFocus(){
   const passwordConfirmationIcon = document.getElementById('password-confirmation-lock-icon');
   const passwordConfirmationError = document.getElementById('password-confirmation-error');
+  const passwordConfirmation = document.getElementById('password-confirmation');
+  passwordConfirmation.classList.remove('validation-border-change');
   if (passwordConfirmationIcon.classList.contains('verif-true')) {
     //do nothing
   } else {
@@ -431,7 +454,7 @@ function passwordConfirmationBlur() {
   const passwordConfirmationIcon = document.getElementById('password-confirmation-lock-icon');
   const passwordConfirmationError = document.getElementById('password-confirmation-error');
   const passwordConfirmation = document.getElementById('password-confirmation');
-  if (passwordConfirmationIcon.classList.contains('verif-true')) {
+  if (passwordConfirmationIcon.classList.contains('verif-true') || passwordConfirmation.value.length === 0) {
     
     //do nothing
   } else {
@@ -440,6 +463,52 @@ function passwordConfirmationBlur() {
     passwordConfirmationError.classList = 'disp-block';
   }
   // if(passwo)
+}
+
+function passwordValidateBoth(e) {
+  const passwordInput = document.getElementById('password-input');
+  const passwordConfirmation = document.getElementById('password-confirmation');
+  const passwordContents = passwordInput.value;
+  const passwordConfirmationIcon = document.getElementById('password-confirmation-lock-icon');
+  const passwordConfirmationError = document.getElementById('password-confirmation-error');
+  console.log('passwordValidateBoth');
+  //console.log(e);
+  //console.log(e.srcElement);
+  // console.log(e.srcElement.id);
+  const sourceElement = e.srcElement.id;
+  if (sourceElement === 'password-input'){
+    let passwordStatus = {
+      len: passwordLengthChange(passwordContents),
+      case: passwordCaseChange(passwordContents),
+      num: passwordNumChange(passwordContents),
+      symbol: passwordSymbolChange(passwordContents),
+      maxLen: passwordContents.length >= 32 ? false : true
+    }
+    let passwordCorrect = true;
+    for (let prop in passwordStatus) {
+      if (passwordStatus[prop] === false) {
+        passwordCorrect = false;
+      }
+    }
+    passwordLockIconChangeKeyPress(passwordCorrect);
+    if (passwordConfirmationIcon.classList.contains('verif-true') || passwordConfirmationIcon.classList.contains('verif-false')){
+
+    }
+  } 
+  if (passwordConfirmation.value.length > 0 || sourceElement === 'password-confirmation') {
+    // if password confirmation box is being used or has been activated
+    if(passwordConfirmation.value.length === 0){}
+    else if(passwordContents === passwordConfirmation.value) {
+      passwordConfirmationIcon.classList.add('verif-true');
+      passwordConfirmationIcon.classList.remove('verif-false');
+      passwordConfirmationError.classList = 'disp-none';
+      passwordConfirmation.classList.remove('validation-border-change');
+  } else {
+      passwordConfirmationIcon.classList.remove('verif-true');
+      // passwordConfirmation.classList.add('validation-border-change');
+    }
+  }
+
 }
 
 const passwordConfirmation = document.getElementById('password-confirmation-lock-icon');
