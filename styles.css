@@ -142,12 +142,17 @@ li a:visited {
   height: 35px;
   width: 118px;
   margin: 20px auto;
-  animation: fadein 733ms ease-in forwards;
+}
+
+.fadein {
+  animation: fadein 2s ease-in forwards;
+  animation-delay: 0s;
 }
 
 @keyframes fadein {
-  from { opacity: 0; }
-  to   { opacity: 1; }
+  0%   { opacity: 0; }
+  50%  {opacity: 0;}
+  100% { opacity: 1; }
 }
 
 /* @keyframes fade-in {
@@ -164,6 +169,7 @@ li a:visited {
   text-transform: lowercase;
   font-size: 18px;
   font-weight: 100;
+  position: relative;
 }
 
 #product-listing {
@@ -179,6 +185,7 @@ li a:visited {
   width: 23px;
   height: 23px;
   margin-right: 4px;
+  position: relative;
 }
 
 .icon:hover {
@@ -197,6 +204,66 @@ li a:visited {
   background: url(https://plugin.intuitcdn.net/identity-authn-core-ui/images/tt-favicon@2x-fbd64ab8.svg) no-repeat;
 }
 
+.left-first {
+  position: relative;
+  /* animation: slide-left 1.1s cubic-bezier(.7,0,0,1) forwards; */
+  animation-duration: 2s;
+  animation-timing-function: cubic-bezier(0.7, 0, 0, 1);
+  animation-delay: 0s;
+  animation-iteration-count: 1;
+  animation-direction: normal;
+  animation-fill-mode: forwards;
+  animation-play-state: running;
+  animation-name: left-first-anim;
+}
+
+@keyframes left-first-anim {
+  0%    { left: 142px;
+          transform: scale(1)}
+  25%   { transform: scale(2)}
+  50%   { left: 142px;
+          transform: scale(1);
+           }
+  100%  { left: 0; }
+
+}
+
+.left-after {
+  animation-duration: 2.15s;
+  animation-timing-function: cubic-bezier(0.7, 0, 0, 1);
+  animation-delay: 0s;
+  animation-iteration-count: 1;
+  animation-direction: normal;
+  animation-fill-mode: forwards;
+  animation-play-state: running;
+  animation-name: left-after-anim;
+}
+
+@keyframes left-after-anim {
+  0%    { 
+          opacity: 0}
+  50%   { left: 50px;
+          opacity: 0}
+  100%   { left: 0;
+           opacity: 100%;
+           }
+}
+
+/* .grow {
+  animation-duration: 0.5s;
+  animation-timing-function: cubic-bezier(0.7, 0, 0, 1);
+  animation-delay: 0s;
+  animation-direction: alternate;
+  animation-iteration-count: 2;
+  animation-fill-mode: forwards;
+  animation-play-state: running;
+  animation-name: grow;
+}
+
+@keyframes grow {
+  from { transform: scale(1); }
+  to   { transform: scale(2); }
+} */
 
 /*********************** Form ************************/
 form {
