@@ -274,28 +274,39 @@ function isNumberKey(e) {
 function isNumberKeyNew(e) {
   // Identify whether characters are being added or subtracted or just moved
   let charCode = e.key;
+  let pn = {};
   //console.log(charCode);
   let ctl = document.getElementById('phone-input');
   let startPos = ctl.selectionStart;
   let endPos = ctl.selectionEnd;
+  pn.startPos = startPos;
+  pn.endPos = endPos;
+  pn.charPos = pn.startPos;
   let locUpdate = 1;
   const numberBox = document.getElementById('phone-input');
   let previousNumber = numberBox.value;
+  pn.previousNumber = previousNumber;
   let rawNumber = numberBox.value;
+  pn.rawNumber = numberBox.value;
+  pn.charCode = charCode;
   //let input = String.fromCharCode(charCode);
   let charsAdded;
   let selectedString = rawNumber.slice(startPos,endPos);
-  let deletedString;
-  let outputNumber;
+  pn.selectedString = selectedString;
+  pn.startPosRaw = numbersInString(pn.previousNumber.slice(0,pn.startPos));
+  pn.endPosRaw = numbersInString(pn.previousNumber.slice(pn.endPos));
+  //console.log(pn);
+  pn.deletedString = null;
+  pn.outputNumber = null;
   if(charCode === ' ') return false;
   if(charCode === 'Backspace' || charCode === 'Delete'){
-    charsAdded = false;
+    pn.charsAdded = false;
   } else if(charCode === 'ArrowLeft' || charCode === 'ArrowRight' || charCode === 'ArrowUp' || charCode === 'ArrowDown' || charCode === 'Tab'){
     return true;
   } else {
     if((charCode < 10)){
       //console.log(charCode)
-      charsAdded = true;
+      pn.charsAdded = true;
     } else {
       return false;
     }
@@ -304,55 +315,57 @@ function isNumberKeyNew(e) {
   //console.log(charCode);
   //Handle selected string replacement
 
-  if(selectedString.length > 0) {
-    if(charsAdded === true){
-      rawNumber = rawNumber.slice(0, startPos)+charCode+rawNumber.slice(endPos);
+  if(pn.selectedString.length > 0) {
+    if(pn.charsAdded){
+      pn.rawNumber = pn.rawNumber.slice(0, startPos)+charCode+pn.rawNumber.slice(endPos);
     } else {
-      rawNumber = rawNumber.replace(selectedString,'');
+      pn.rawNumber = pn.rawNumber.replace(selectedString,'');
     }
   } else {
-    if(charsAdded === true){
-      if(startPos === rawNumber.length){
-      rawNumber += charCode;
+    if(pn.charsAdded === true){
+      if(pn.startPos === pn.rawNumber.length){
+        pn.rawNumber += charCode;
       } else {
-        rawNumber = rawNumber.slice(0,startPos) + charCode + rawNumber.slice(startPos);
+        pn.rawNumber = pn.rawNumber.slice(0,pn.startPos) + charCode + pn.rawNumber.slice(pn.startPos);
       }
     } else if (charCode === 'Backspace') {
-      if(startPos !== 0){  
-        deletedString = selectedString.length === 0 ? rawNumber.charAt(startPos-1) : selectedString;
-        rawNumber = rawNumber.slice(0,startPos-1)+rawNumber.slice(startPos);
+      if(pn.startPos !== 0){  
+        pn.deletedString = pn.selectedString.length === 0 ? pn.rawNumber.charAt(pn.startPos-1) : pn.selectedString;
+        pn.rawNumber = pn.rawNumber.slice(0,pn.startPos-1)+pn.rawNumber.slice(pn.startPos);
       }
     } else if (charCode === 'Delete') {
       if(startPos !== rawNumber.length){
-        deletedString = selectedString.length === 0 ? rawNumber.charAt(startPos) : selectedString;
-        rawNumber = rawNumber.slice(0,startPos) + rawNumber.slice(startPos+1);
+        pn.deletedString = pn.selectedString.length === 0 ? rawNumber.charAt(pn.startPos) : pn.selectedString;
+        pn.rawNumber = pn.rawNumber.slice(0,pn.startPos) + pn.rawNumber.slice(pn.startPos+1);
       }
     }
   }
   //console.log('rawNumber '+rawNumber);
   // Place raw number
-  let strippedNumber = rawNumber.replace(/[\(\)\s\-]/g, '');
+  pn.strippedNumber = pn.rawNumber.replace(/[\(\)\s\-]/g, '');
   //formatPhoneNumber(strippedNumber);
   // format stripped number
   //formatPhoneNumber(strippedNumber, charCode, deleteString, outputNumber, rawNumber)
   //console.log('strippedNumber '+strippedNumber);
 
 
-  if((charCode === 'Backspace' || charCode === 'Delete') && (isNaN(deletedString) || deletedString === ' ')){
-    //console.log('deleted String = '+deletedString);
-    outputNumber = rawNumber;
+  if((pn.charCode === 'Backspace' || pn.charCode === 'Delete') && (isNaN(pn.deletedString) || pn.deletedString === ' ')){
+    //console.log('deleted String = '+pn.deletedString);
+    pn.outputNumber = pn.rawNumber;
+    pn.newCharPos = pn.charPos;
+    if(pn.charCode === 'Backspace') pn.newCharPos--;
   } else {
-    outputNumber = formatPhoneNumber(strippedNumber);
+  pn = formatPhoneNumber(pn);
   }
   locUpdate = 1;
-  let preString = previousNumber.slice(0,startPos);
+  let preString = previousNumber.slice(0,pn.startPos);
   let preStringLen = numbersInString(preString);
-  let postString = previousNumber.slice(endPos);
+  let postString = previousNumber.slice(pn.endPos);
   let postStringLen = numbersInString(postString);
-  let charPos = startPos;
-  let snLen = strippedNumber.length;
+  let charPos = pn.startPos;
+  let snLen = pn.strippedNumber.length;
   if(snLen < 3){
-    charPos = startPos;
+    charPos = pn.startPos;
   } else if(snLen === 3) {
     console.log('len = 3')
     if(startPos === 2) {
@@ -383,7 +396,7 @@ function isNumberKeyNew(e) {
   } else {
     console.log('greater than 10 chars, single');
     charPos = preStringLen;
-    if(charCode === 'Backspace' && selectedString.length === 0) {
+    if(charCode === 'Backspace' && pn.selectedString.length === 0) {
       console.log('greater than 10 chars, single backspace');
       //charPos--;
     }
@@ -392,33 +405,67 @@ function isNumberKeyNew(e) {
   // console.log(startPos, endPos);
   // console.log('preStringNonNums '+preStringLen+ ' postStringNonNums '+ postStringLen);
   charsAdded ? charPos++ : null;
-  charCode === 'Backspace' && selectedString.length === 0 ? charPos-- : null;
+  charCode === 'Backspace' && pn.selectedString.length === 0 ? charPos-- : null;
   if (charPos < 0) charPos = 0
   //console.log('outputNumber '+outputNumber);
-  numberBox.value = outputNumber;
-  setCaretPosition('phone-input', charPos);
-  console.log(previousNumber+' to '+outputNumber+'\n'+charCode+'\nsnLen '+snLen+'\ncharPos '+charPos+'\nstartPos '+startPos+'\npreStringLen '+preStringLen);
-
+  numberBox.value = pn.outputNumber;
+  setCaretPosition('phone-input', pn.newCharPos);
+  console.log(previousNumber+' to '+pn.outputNumber+'\n'+charCode+'\nsnLen '+snLen+'\ncharPos '+charPos+'\nstartPos '+pn.startPos+'\npreStringLen '+preStringLen);
+  console.log(pn);
   return false;
 }
 
-// function formatPhoneNumber(strippedNumber, charCode, deletedString, outputNumber, rawNumber) {
-function formatPhoneNumber(phoneNumber) {
+// function formatPhoneNumber(strippedNumber, charCode, pn.deletedString, outputNumber, rawNumber) {
+function formatPhoneNumber(phoneObj) {
+  let phoneNumber;
+  let charPos = 0;
+  let charCode = '';
+  let selectedString = 'ph';
+  let deletedString = null;
+  if(typeof phoneObj === 'object') {
+    console.log('obj');
+    phoneNumber = phoneObj.strippedNumber;
+    charPos = phoneObj.startPosRaw;
+    charCode = phoneObj.charCode;
+    selectedString = phoneObj.selectedString;
+    deletedString = phoneObj.deletedString;
+  } else {
+    phoneNumber = phoneObj;
+    console.log('other');
+  }
+  //let phoneNumber = phoneObj.strippedNumber;
   const numberBox = document.getElementById('phone-input');
   let strippedNumber = phoneNumber.replace(/[\(\)\s\-]/g, '');
   let outputNumber;
   let locUpdate;
   //console.log(strippedNumber.length);
-  if(strippedNumber.length < 3) {
-    outputNumber = strippedNumber;
-  } else if(strippedNumber.length === 3){
-    outputNumber = strippedNumber + '-';
-    locUpdate++;
-  } else if(strippedNumber.length < 8){
-    outputNumber = strippedNumber.slice(0,3)+'-'+strippedNumber.slice(3);
-    locUpdate++;
-  } else if(strippedNumber.length <= 10) {
-    outputNumber = '('+strippedNumber.slice(0,3)+') '+strippedNumber.slice(3,6)+'-'+strippedNumber.slice(6);
+  if((charCode === 'Backspace' || charCode === 'Delete') && (isNaN(deletedString) || deletedString === ' ')) return phoneNumber;
+  //if((charCode !== 'Backspace' && charCode !== 'Delete') ){
+  if(true){
+    if(strippedNumber.length < 3) {
+      outputNumber = strippedNumber;
+    } else if(strippedNumber.length === 3){
+      outputNumber = strippedNumber + '-';
+      if (charPos >= 2) {
+        charPos = 4;
+      }
+    } else if(strippedNumber.length < 8){
+      outputNumber = strippedNumber.slice(0,3)+'-'+strippedNumber.slice(3);
+      if (charPos >= 3) {
+        charPos++;
+      }
+    } else if(strippedNumber.length <= 10) {
+      outputNumber = '('+strippedNumber.slice(0,3)+') '+strippedNumber.slice(3,6)+'-'+strippedNumber.slice(6);
+      if (charPos <= 2) {
+        charPos++;
+      } else if (charPos <= 5) {
+        charPos+=3;
+      } else {
+        charPos+=4;
+      }
+    } else {
+      outputNumber = strippedNumber;
+    }
     // switch (true) {
     //   case (startPos === 0):
     //     locUpdate = 0;
@@ -436,8 +483,67 @@ function formatPhoneNumber(phoneNumber) {
     //     locUpdate = 5;
     //     break;
     // }
-  } else {
-    outputNumber = strippedNumber;
+  }
+  if(charCode === 'Backspace') {
+    charPos--;
+    if(phoneObj.selectedString.length > 0) charPos++;
+    if(phoneObj.strippedNumber.length < 3){
+      //thing
+    } else if(phoneObj.strippedNumber.length === 3) {
+      charPos++;
+      if(phoneObj.startPos === 3) {}
+      else if(phoneObj.startPos === 4) charPos++;
+      else if(phoneObj.startPos === 5) charPos++;
+      //remove later
+      charPos = phoneObj.startPosRaw-1;
+      if(phoneObj.startPos === 5) charPos++;
+    } else if(strippedNumber.length < 8) {
+      if(phoneObj.startPos <= 3) {
+        charPos = phoneObj.startPosRaw-1;
+      }
+      if (charPos >=2) {
+        charPos++;
+        if(phoneObj.startPos === 3) {charPos--;}
+        charPos = phoneObj.startPosRaw;
+      } 
+    }else if(strippedNumber.length < 10) {
+        charPos = phoneObj.startPos;
+        if (charPos <= 2) {
+          charPos++;
+        } else if (charPos <= 5) {
+          charPos+=3;
+        } else {
+          charPos+=4;
+        }
+      charPos = phoneObj.startPos-1;
+      //  if(phoneObj.startPos === 9)charPos++;
+      } else if(strippedNumber.length === 10) {
+        charPos = phoneObj.startPos;
+        if (charPos === 1 || charPos <= 3 ){
+          charPos = charPos;
+        } else if (charPos <= 2) {
+          charPos++;
+        } else if (charPos <= 6) {
+          charPos+=2;
+        } else {
+          charPos+=3;
+        }
+        //unstructured
+      }
+    }
+  //}
+   
+  if(typeof phoneObj === 'object'){
+    if(phoneObj.charCode !== 'Backspace' && phoneObj.charCode !== 'Delete') {
+      charPos++;
+    } else {
+      //outputNumber = phoneObj.rawNumber;
+    }
+    if(phoneObj.selectedString.length > 0 && charCode === 'Backspace') charPos++;
+    phoneObj.newCharPos = charPos;
+    phoneObj.outputNumber = outputNumber;
+    phoneObj.strippedNumberLength = strippedNumber.length;
+    return phoneObj;
   }
   return outputNumber;
 }
