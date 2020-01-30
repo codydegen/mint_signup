@@ -21,7 +21,6 @@ const emailFocus = document.querySelectorAll('.email');
 
 emailClick.addEventListener('focus', () => {
   for (let item of emailFocus) {
-    // console.log(item);
     item.classList.add('visible');
   }
   emailValidate();
@@ -29,19 +28,16 @@ emailClick.addEventListener('focus', () => {
 
 emailClick.addEventListener('blur', () => {
   for (let item of emailFocus) {
-    // console.log(item);
     item.classList.remove('visible');
   }
   emailValidate();
 });
 
-//Figure out a better way to do this
 const phoneClick = document.getElementById('phone-input');
 const phoneFocus = document.querySelectorAll('.phone');
 
 phoneClick.addEventListener('focus', () => {
   for (let item of phoneFocus) {
-    // console.log(item);
     item.classList.add('visible');
   }
   phoneValidate();
@@ -49,16 +45,12 @@ phoneClick.addEventListener('focus', () => {
 
 phoneClick.addEventListener('blur', () => {
   for (let item of phoneFocus) {
-    // console.log(item);
     item.classList.remove('visible');
   }
   const numberBox = document.getElementById('phone-input');
   numberBox.value = formatPhoneNumber(numberBox.value);
   phoneValidate();
 });
-
-// phoneClick.addEventListener('keypress', function (e) {
-//   return isNumberKey(e)});
 
 const passwordClick = document.getElementById('password-input');
 const passwordFocus = document.querySelectorAll('.password.popup');
@@ -68,9 +60,7 @@ const passwordFirstClick = document.querySelectorAll('.first-click');
 
 passwordClick.addEventListener('focus', e => {
   for (let item of passwordFocus) {
-    // console.log(item);
     item.classList.add('visible');
-    // passwordHidden.classList.add('visible');
   }
   if(!passwordWrapper.classList.contains('expanded')){
     passwordWrapper.classList.add('expanded');
@@ -80,21 +70,16 @@ passwordClick.addEventListener('focus', e => {
   if(passwordConfirmation.value.length > 0) {
     passwordConfirmationFocus();
   }
-  // passwordWrapper.classList.toggle('expanded');
-  // passwordHidden.classList.toggle('visible');
 });
 
 passwordWrapper.addEventListener('transitionend', () => {
   passwordHidden.classList.add('visible');
-  //console.log('ended event');
 })
 
 passwordClick.addEventListener('blur', e => {
   for (let item of passwordFocus) {
-    // console.log(item);
     item.classList.remove('visible');
   }
-
   for (let item of passwordFirstClick) {
     item.classList.remove('first-click');
   }
@@ -103,7 +88,6 @@ passwordClick.addEventListener('blur', e => {
   if(passwordConfirmation.value.length > 0) {
     passwordConfirmationBlur();
   }
-  // passwordHidden.classList.toggle('visible');
 
 });
 
@@ -113,29 +97,27 @@ passwordClick.addEventListener('keyup', e => {
 
 function emailValidate() {
   const email = document.getElementById('email-input');
-  //console.log(email);
   let mailFormat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,256})+$/
   if((email.value === '') || (email === document.activeElement)) {
     changeEmailStatus('verif-none');
   } else if(email.value.match(mailFormat)) {
     changeEmailStatus('verif-true');
-    // document.querySelector('#email-input').classList = '';
   } else {
     changeEmailStatus('verif-false');
-    // document.querySelector('#email-input').classList = 'email-validation-failed';
-
   }
 
 }
 
 function changeEmailStatus(status) {
   document.querySelector('#email-validation-icon').className = 'validation-icon '+ status;
+  const emailInput = document.querySelector('#email-input');
+  const emailError = document.querySelector('#email-error');
   if(status === 'verif-false') {
-    document.querySelector('#email-input').classList.add('validation-border-change');
-    document.querySelector('#email-error').classList.add('visible');
+    emailInput.classList.add('validation-border-change');
+    emailError.classList.add('visible');
   } else {
-    document.querySelector('#email-input').classList.remove('validation-border-change');
-    document.querySelector('#email-error').classList.remove('visible');
+    emailInput.classList.remove('validation-border-change');
+    emailError.classList.remove('visible');
   }
 }
 
@@ -178,124 +160,26 @@ function changePhoneStatus(status) {
 }
 
 function isNumberKey(e) {
-  // let charCode = (e.which) ? e.which : event.keyCode;
-  let charCode = e.key;
-  let charThing = e.code;
+  isNumberKeyNew(e);
+  // this function can be re-factored considerably. An issue I had which 
+  // I'm sure could be solved is that I wasn't sure how to limit inputs to just numbers
+  // without having the event listener be directly in the HTML. If I would've been capable of doing this,
+  // this function would probably look much different.
 
-  // let selectedChar = caret_get_position(e);
-  // console.log(selectedChar)
-
-  let ctl = document.getElementById('phone-input');
-  //console.log('strippedNumber')
-  let startPos = ctl.selectionStart;
-  let endPos = ctl.selectionEnd;
-  
-
-
-
-  // console.log(charCode);
-  // console.log(charThing);
-  let numberBox = document.getElementById('phone-input');
-  let number = numberBox.value;
-  let newLength;
-  let selectedString = number.slice(startPos,endPos);
-  console.log(startPos + ", " + endPos);
-  console.log('selected: '+number.slice(startPos,endPos));
-  if(charCode === 'Backspace' || charCode === 'Delete'){
-    newLength = -1;
-  } else if(charCode === 'ArrowLeft' || charCode === 'ArrowRight' || charCode === 'ArrowUp' || charCode === 'ArrowDown') {
-    newLength = 0;
-  } else {
-    newLength = 1;
-  }
-  if(newLength === -1){
-    if(selectedString.length > 0){
-    number = number.replace(selectedString, '');
-    console.log('removed substring '+selectedString);
-    //return false;
-    }
-  }
-  let newNumber;
-  let strippedNumber = number.replace(/[\(\)\s\-]/g, '');
-  console.log(strippedNumber);
-  if((charCode < 48 || charCode > 57)){
-    if(strippedNumber.length < 3){
-      numberBox.value = strippedNumber;
-    }
-    else if(strippedNumber.length === 3){
-      numberBox.value = strippedNumber += '-';
-    } else if(strippedNumber.length === 7) {
-      numberBox.value = '('+strippedNumber.slice(0,3)+') '+strippedNumber.slice(3,6)+'-'+strippedNumber.slice(6);
-    }
-    return true;
-  } else if(newLength === -1) {
-
-    // if(strippedNumber.length )
-  } else if(charCode === 'ArrowLeft' || charCode === 'ArrowRight' || charCode === 'ArrowUp' || charCode === 'ArrowDown'){
-    return true;
-  }
-  return false;
-  console.log(strippedNumber);
-  // console.log(number.length);
-  // console.log('e.which = ' + e.which + ' event.keyCode = '+event.keyCode);
-  
-  
-  
-  // if ((charCode < 48 || charCode > 57)){
-  //   if(number.length === 3){
-  //     numberBox.value += '-';
-  //   } else if(number.length === 8){
-  //     newNumber = '('+number.slice(0,3)+') '+number.slice(4,7)+'-'+number.slice(7);
-  //     numberBox.value = newNumber; 
-  //   }
-  //   //numberBox.value += charCode;
-  //   return true;
-  // } else if(charCode === 'Backspace'||charCode === 'Delete'){
-  //   //console.log('backspace');
-  //   if(number.length === 5 && endPos === 5){
-  //     newNumber = number.slice(0,4);
-  //     numberBox.value = newNumber;
-  //   } else if(number.length === 12){
-  //     newNumber = number.slice(1,4)+'-'+number.slice(6,9)+number.slice(10);
-  //     numberBox.value = newNumber;
-  //   }
-  //   return true;
-
-
-
-//  /*}*/ else if(charCode === 'ArrowLeft' || charCode === 'ArrowRight' || charCode === 'ArrowUp' || charCode === 'ArrowDown'){
-    return true;
- // }
-  // console.log('false');
-  return false;
-}
-
-
-function isNumberKeyNew(e) {
   // Identify whether characters are being added or subtracted or just moved
   let charCode = e.key;
   let pn = {};
   //console.log(charCode);
-  let ctl = document.getElementById('phone-input');
-  let startPos = ctl.selectionStart;
-  let endPos = ctl.selectionEnd;
-  pn.startPos = startPos;
-  pn.endPos = endPos;
-  pn.charPos = pn.startPos;
-  let locUpdate = 1;
   const numberBox = document.getElementById('phone-input');
-  let previousNumber = numberBox.value;
-  pn.previousNumber = previousNumber;
-  let rawNumber = numberBox.value;
+  pn.startPos = numberBox.selectionStart;
+  pn.endPos = numberBox.selectionEnd;
+  pn.charPos = pn.startPos;
+  pn.previousNumber = numberBox.value;
   pn.rawNumber = numberBox.value;
   pn.charCode = charCode;
-  //let input = String.fromCharCode(charCode);
-  let charsAdded;
-  let selectedString = rawNumber.slice(startPos,endPos);
-  pn.selectedString = selectedString;
-  pn.startPosRaw = numbersInString(pn.previousNumber.slice(0,pn.startPos));
-  pn.endPosRaw = numbersInString(pn.previousNumber.slice(pn.endPos));
-  //console.log(pn);
+  pn.selectedString = pn.rawNumber.slice(pn.startPos,pn.endPos);
+  pn.startPosRaw = numbersInStringLength(pn.previousNumber.slice(0,pn.startPos));
+  pn.endPosRaw = numbersInStringLength(pn.previousNumber.slice(pn.endPos));
   pn.deletedString = null;
   pn.outputNumber = null;
   if(charCode === ' ') return false;
@@ -305,21 +189,18 @@ function isNumberKeyNew(e) {
     return true;
   } else {
     if((charCode < 10)){
-      //console.log(charCode)
       pn.charsAdded = true;
     } else {
       return false;
     }
-    // charsAdded = 1;
   }
-  //console.log(charCode);
   //Handle selected string replacement
 
   if(pn.selectedString.length > 0) {
     if(pn.charsAdded){
-      pn.rawNumber = pn.rawNumber.slice(0, startPos)+charCode+pn.rawNumber.slice(endPos);
+      pn.rawNumber = pn.rawNumber.slice(0, pn.startPos)+charCode+pn.rawNumber.slice(endPos);
     } else {
-      pn.rawNumber = pn.rawNumber.replace(selectedString,'');
+      pn.rawNumber = pn.rawNumber.replace(pn.selectedString,'');
     }
   } else {
     if(pn.charsAdded === true){
@@ -340,14 +221,8 @@ function isNumberKeyNew(e) {
       }
     }
   }
-  //console.log('rawNumber '+rawNumber);
   // Place raw number
   pn.strippedNumber = pn.rawNumber.replace(/[\(\)\s\-]/g, '');
-  //formatPhoneNumber(strippedNumber);
-  // format stripped number
-  //formatPhoneNumber(strippedNumber, charCode, deleteString, outputNumber, rawNumber)
-  //console.log('strippedNumber '+strippedNumber);
-
 
   if((pn.charCode === 'Backspace' || pn.charCode === 'Delete') && (isNaN(pn.deletedString) || pn.deletedString === ' ')){
     //console.log('deleted String = '+pn.deletedString);
@@ -358,64 +233,164 @@ function isNumberKeyNew(e) {
   pn = formatPhoneNumber(pn);
   }
   locUpdate = 1;
-  let preString = previousNumber.slice(0,pn.startPos);
-  let preStringLen = numbersInString(preString);
-  let postString = previousNumber.slice(pn.endPos);
-  let postStringLen = numbersInString(postString);
+  let preString = pn.previousNumber.slice(0,pn.startPos);
+  let preStringLen = numbersInStringLength(preString);
+  let postString = pn.previousNumber.slice(pn.endPos);
+  let postStringLen = numbersInStringLength(postString);
   let charPos = pn.startPos;
   let snLen = pn.strippedNumber.length;
   if(snLen < 3){
     charPos = pn.startPos;
   } else if(snLen === 3) {
     console.log('len = 3')
-    if(startPos === 2) {
+    if(pn.startPos === 2) {
       console.log('len = 3 and startPos = 2');
       charPos = 3;
-    } else if (startPos === 3) {
+    } else if (pn.startPos === 3) {
       console.log('len = 3 and startPos = 3');
       charPos = 5;
     }
   } else if(snLen < 8) {
     if (preStringLen >= 3 && charCode !== 'Backspace') {
-      //charPos++;
     }
   } else if (snLen <= 10) {
-    if (startPos === 0) {
+    if (pn.startPos === 0) {
       console.log('before bracket');
       charPos = 0;
     } else if (preStringLen > 0 && preStringLen <= 3) {
       console.log("in brackets");
-      charPos = startPos + 1;
+      charPos = pn.startPos + 1;
     } else if (preStringLen > 3 && preStringLen <= 6) {
       console.log('in first part');
-      charPos = startPos + 4;
+      charPos = pn.startPos + 4;
     } else {
       console.log('in last part');
-      charPos = startPos + 5;
+      charPos = pn.startPos + 5;
     }
   } else {
     console.log('greater than 10 chars, single');
     charPos = preStringLen;
     if(charCode === 'Backspace' && pn.selectedString.length === 0) {
       console.log('greater than 10 chars, single backspace');
-      //charPos--;
     }
   }
-  // console.log('pre: '+preString+', post: '+postString);
-  // console.log(startPos, endPos);
-  // console.log('preStringNonNums '+preStringLen+ ' postStringNonNums '+ postStringLen);
-  charsAdded ? charPos++ : null;
+  //charsAdded ? charPos++ : null;
   charCode === 'Backspace' && pn.selectedString.length === 0 ? charPos-- : null;
-  if (charPos < 0) charPos = 0
-  //console.log('outputNumber '+outputNumber);
+  if (charPos < 0) charPos = 0;
   numberBox.value = pn.outputNumber;
   setCaretPosition('phone-input', pn.newCharPos);
-  console.log(previousNumber+' to '+pn.outputNumber+'\n'+charCode+'\nsnLen '+snLen+'\ncharPos '+charPos+'\nstartPos '+pn.startPos+'\npreStringLen '+preStringLen);
-  console.log(pn);
+  checkFormat(numberBox.value);
+  
+  //console.log(previousNumber+' to '+pn.outputNumber+'\n'+charCode+'\nsnLen '+snLen+'\ncharPos '+charPos+'\nstartPos '+pn.startPos+'\npreStringLen '+preStringLen);
+  //console.log(pn);
   return false;
 }
 
-// function formatPhoneNumber(strippedNumber, charCode, pn.deletedString, outputNumber, rawNumber) {
+function isNumberKeyNew(e) {
+  let charCode = e.key;
+  let pn = {};
+  //console.log(charCode);
+  const numberBox = document.getElementById('phone-input');
+  const rawNumber = numberBox.value;
+
+  const currentFormat = checkFormat(rawNumber);
+  // handle various inputs. Only allow inputs if they are numbers, navigation keys, or delete or backspace.
+  if(charCode === ' ') return false;
+  if(charCode === 'Backspace' || charCode === 'Delete'){
+    pn.charsAdded = false;
+  } else if(charCode === 'ArrowLeft' || charCode === 'ArrowRight' || charCode === 'ArrowUp' || charCode === 'ArrowDown' || charCode === 'Tab'){
+    return true;
+  } else {
+    if((charCode < 10)){
+      pn.charsAdded = true;
+    } else {
+      return false;
+    }
+  }
+
+  const startPosition = numberBox.selectionStart;
+  const rawStartPosition = numbersInStringLength(rawNumber.slice(0,startPosition));
+  const endPosition = numberBox.selectionEnd;
+  const rawEndPosition = numbersInStringLength(rawNumber.slice(endPosition));
+  const selectedString = rawNumber.slice(startPosition,endPosition);
+
+  //Handle selected string replacement
+  let newNumber;
+  if(selectedString.length > 0) {
+    if(pn.charsAdded){
+      newNumber = rawNumber.slice(0, startPosition)+charCode+rawNumber.slice(endPosition);
+    } else {
+      newNumber = rawNumber.replace(selectedString,'');
+    }
+  } else {
+    if(pn.charsAdded === true){
+      if(startPosition === rawNumber.length){
+        newNumber = rawNumber + charCode;
+      } else {
+        newNumber = rawNumber.slice(0,startPosition) + charCode + rawNumber.slice(startPosition);
+      }
+    } else if (charCode === 'Backspace') {
+      if(startPosition !== 0){  
+        deletedString = selectedString.length === 0 ? rawNumber.charAt(startPosition-1) : selectedString;
+        newNumber = rawNumber.slice(0,startPosition-1)+rawNumber.slice(startPosition);
+      }
+    } else if (charCode === 'Delete') {
+      if(startPosition !== rawNumber.length){
+        deletedString = selectedString.length === 0 ? rawNumber.charAt(startPosition) : selectedString;
+        newNumber = rawNumber.slice(0,startPosition) + rawNumber.slice(startPosition+1);
+      }
+    }
+  }
+  const newFormat = checkFormat(newNumber);
+  console.log(currentFormat, newFormat);
+  numberBox.value = newNumber;
+  if(currentFormat === newFormat) {
+    let inputAdjustment;
+    if(pn.charsAdded) {
+      inputAdjustment = 1;
+    } else {
+      if(charCode === 'Delete') {
+        inputAdjustment = 0;
+      } else {
+        inputAdjustment = -1;
+      }
+    }
+    setCaretPosition('phone-input', startPosition + inputAdjustment);
+  } else {
+    console.log('format change');
+  }
+  return false;
+};
+
+function checkFormat(phoneNumber) {
+  const rawPhoneNumber = numbersInString(phoneNumber);
+  const numLength = rawPhoneNumber.length;
+  let form = '';
+  switch (true) {
+    case (numLength <= 2):
+      form = 'rawShort';
+      break;
+    case (numLength <= 7):
+      form = 'sevenDigits';
+      break;
+    case (numLength <= 10):
+      form = 'areaCode';
+      break;
+    case (numLength > 10):
+      form = 'rawLong';
+      break;
+    default: 
+    console.log(` error in format detected. phone number is "${rawPhoneNumber}"`);
+      break;
+  }
+  // console.log(form);
+  return form;
+};
+
+function formatPhoneNumberNew() {
+  
+}
+
 function formatPhoneNumber(phoneObj) {
   let phoneNumber;
   let charPos = 0;
@@ -423,7 +398,7 @@ function formatPhoneNumber(phoneObj) {
   let selectedString = 'ph';
   let deletedString = null;
   if(typeof phoneObj === 'object') {
-    console.log('obj');
+    // console.log('obj');
     phoneNumber = phoneObj.strippedNumber;
     charPos = phoneObj.startPosRaw;
     charCode = phoneObj.charCode;
@@ -431,16 +406,13 @@ function formatPhoneNumber(phoneObj) {
     deletedString = phoneObj.deletedString;
   } else {
     phoneNumber = phoneObj;
-    console.log('other');
+    // console.log('other');
   }
-  //let phoneNumber = phoneObj.strippedNumber;
-  const numberBox = document.getElementById('phone-input');
+  // const numberBox = document.getElementById('phone-input');
   let strippedNumber = phoneNumber.replace(/[\(\)\s\-]/g, '');
   let outputNumber;
-  let locUpdate;
-  //console.log(strippedNumber.length);
+  // let locUpdate;
   if((charCode === 'Backspace' || charCode === 'Delete') && (isNaN(deletedString) || deletedString === ' ')) return phoneNumber;
-  //if((charCode !== 'Backspace' && charCode !== 'Delete') ){
   if(true){
     if(strippedNumber.length < 3) {
       outputNumber = strippedNumber;
@@ -466,23 +438,6 @@ function formatPhoneNumber(phoneObj) {
     } else {
       outputNumber = strippedNumber;
     }
-    // switch (true) {
-    //   case (startPos === 0):
-    //     locUpdate = 0;
-    //     break;
-    //   case (startPos < 4):
-    //     locUpdate = 1;
-    //     break;
-    //   case (startPos < 6):
-    //     locUpdate = 2;
-    //     break;
-    //   case (startPos < 10):
-    //     locUpdate = 4;
-    //     break;
-    //   default:
-    //     locUpdate = 5;
-    //     break;
-    // }
   }
   if(charCode === 'Backspace') {
     charPos--;
@@ -549,40 +504,21 @@ function formatPhoneNumber(phoneObj) {
 }
 
 function nonNumbersInString(str) {
-  return str.replace(/\d+/g,"").length;
+  return str.replace(/\d+/g,"");
+}
+
+function nonNumbersInStringLength(str) {
+  return nonNumbersInString(str).length;
 }
 
 function numbersInString(str) {
-  return str.replace(/\D+/g,"").length;
+  if (str === undefined) return '';
+  return str.replace(/\D+/g,"");
 }
-//   return outputNumber;
-// }
 
-// var caret_get_position = function(element){
-//   var pos    = 0;
-//   var posEnd = 0;
-//   if('selectionStart' in element){
-//       pos    = element.selectionStart;
-//       posEnd = element.selectionEnd;
-//   }else if('selection' in document){
-//       element.focus();
-//       var Sel       = document.selection.createRange();
-//       var SelLength = document.selection.createRange().text.length;
-//       Sel.moveStart('character', -element.value.length);
-//       pos    = Sel.text.length-SelLength;
-//       posEnd = Sel.text.length;
-//   }
-//   // return both selection start and end;
-//   return [pos, posEnd];
-// };
-
-
-
-// function addPhoneSyntax() {
-//   const phoneInput = document.querySelector('#phone-input');
-//   console.log(phoneInput.value.length);
-// }
-
+function numbersInStringLength(str) {
+  return numbersInString(str).length;
+}
 
 function passwordLengthChange(str) {
   const pw = document.getElementById('password-length').childNodes;
@@ -702,14 +638,12 @@ function passwordLockIconChangeSelect(event) {
   const passwordIcon = document.getElementById('password-lock-icon');
   const pwClassList = passwordIcon.classList;
   const passwordBorder = document.getElementById('password-input');
-  //console.log(pwClassList);
   if(event === 'blur' && pwClassList.value !== 'success') {
     passwordIcon.classList = 'fail';
     passwordBorder.classList.add('validation-border-change');
   } else if(event === 'focus' && pwClassList.value !== 'success') {
     passwordIcon.classList = 'inprogress';
   }
-  //console.log(pwClassList);
 }
 const passwordConfirmationClick = document.getElementById('password-confirmation');
 
@@ -748,7 +682,6 @@ function passwordConfirmationBlur() {
     passwordConfirmationIcon.classList.add('verif-false');
     passwordConfirmationError.classList = 'disp-block';
   }
-  // if(passwo)
 }
 
 function passwordValidate(e) {
@@ -757,11 +690,8 @@ function passwordValidate(e) {
   const passwordContents = passwordInput.value;
   const passwordConfirmationIcon = document.getElementById('password-confirmation-lock-icon');
   const passwordConfirmationError = document.getElementById('password-confirmation-error');
-  console.log('passwordValidate');
-  console.log(passwordContents, passwordConfirmation.value);
-  //console.log(e);
-  //console.log(e.srcElement);
-  // console.log(e.srcElement.id);
+  // console.log('passwordValidate');
+  // console.log(passwordContents, passwordConfirmation.value);
   const sourceElement = e.srcElement.id;
   if (sourceElement === 'password-input'){
     let passwordStatus = {

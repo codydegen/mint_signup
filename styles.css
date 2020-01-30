@@ -107,7 +107,6 @@ button {
   background-size: contain;
 }
 
-
 #sign-in-btn {
   margin-left: 10px;
 }
@@ -155,12 +154,6 @@ li a:visited {
   100% { opacity: 1; }
 }
 
-/* @keyframes fade-in {
-  to {
-      opacity: 1
-  }
-} */
-
 #footer-items > li > a:hover {
   text-decoration: underline;
 }
@@ -206,7 +199,6 @@ li a:visited {
 
 .left-first {
   position: relative;
-  /* animation: slide-left 1.1s cubic-bezier(.7,0,0,1) forwards; */
   animation-duration: 2s;
   animation-timing-function: cubic-bezier(0.7, 0, 0, 1);
   animation-delay: 0s;
@@ -249,31 +241,10 @@ li a:visited {
            }
 }
 
-/* .grow {
-  animation-duration: 0.5s;
-  animation-timing-function: cubic-bezier(0.7, 0, 0, 1);
-  animation-delay: 0s;
-  animation-direction: alternate;
-  animation-iteration-count: 2;
-  animation-fill-mode: forwards;
-  animation-play-state: running;
-  animation-name: grow;
-}
-
-@keyframes grow {
-  from { transform: scale(1); }
-  to   { transform: scale(2); }
-} */
-
 /*********************** Form ************************/
 form {
-  /* width: 400px;  */
   background-color: white;
-  /* border-width: 1px;
-  border-color: gray;
-  border-style: solid; */
   margin: 0 auto;
-  /* border-bottom-width: 0; */
 }
 
 fieldset {
@@ -281,7 +252,6 @@ fieldset {
   font-family: AvenirNext,Avenir,Helvetica Neue,Helvetica,Arial,sans-serif;
   padding: 30px;
   padding-bottom: 33px;
-  
 }
 
 #sign-up-create-account {
@@ -309,8 +279,6 @@ label {
   text-align: left;
   display: block;
   line-height: 25px;
-  /* font-size: 1.4em; */
-  /* box-shadow: 0,0,0,  */
 }
 
 .text-input {
@@ -330,15 +298,6 @@ label {
   box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(82,168,236,.6);
   outline-offset: -2px;
 }
-
-/* #email-error {
-  position: absolute;
-  font-size: .85em;
-  background-color: #404040;
-  top: 0;
-  margin-left: 15px;
-  left: 100%;
-} */
 
 #email-wrapper {
   height: auto;
@@ -367,10 +326,8 @@ label {
   position: absolute;
   top: 33px;
   left: 290px;
-  /* background: url(https://plugin.intuitcdn.net/identity-authn-core-ui/images/lock-left-grey@3x-a1ab5bd1.png) no-repeat 0 50%/21px 21px; */
   width: 33px;
   height: 30px;
-  /* background: white; */
 }
 
 .verif-none {
@@ -395,8 +352,6 @@ label {
   font-size: 10px;
   text-align: left;
   height: 30px;
-  /* display: block; */
-
 }
 #phone-verification-container {
   display: none;
@@ -410,9 +365,6 @@ label {
 }
 
 #phone-verification {
-  /* top: 5px; */
-  /* left: 100px; */
-  /* position: absolute; */
   vertical-align: middle;
   display: inline-block;
   background: white;
@@ -458,15 +410,12 @@ i {
   line-height: 1.2;
   text-align: left;
   margin: 5px 0;
-  /* display: none; */
 }
 
 #phone-error {
-  /* display: block; */
   text-align: left;
   color: #eb3432;
   margin: 5px 0;
-  /* visibility: hidden; */
   line-height: 1.2em;
   height: 20px;
 }
@@ -481,10 +430,7 @@ i {
 
 #password-wrapper {
   height: 95px;
-  /* display: flex; */
-  /* height: auto; */
   transition: 0.8s;
-  /* background: red; */
 }
 
 #password-wrapper.expanded {
@@ -504,11 +450,9 @@ i {
 }
 
 #password-confirmation-error {
-    /* display: block; */
     text-align: left;
     color: #eb3432;
     margin: 5px 0;
-    /* visibility: hidden; */
     line-height: 1.2em;
     height: 20px;
 }
@@ -520,20 +464,17 @@ i {
   background: url(https://plugin.intuitcdn.net/identity-authn-core-ui/images/lock-left-grey@3x-a1ab5bd1.png) no-repeat 0 50%/21px 21px;
   width: 33px;
   height: 30px;
-  /* background: white; */
 }
 
 #password-confirmation-lock-icon {
   position: absolute;
   top: 210px;
   left: 288px;
-  /* background: url(https://plugin.intuitcdn.net/identity-authn-core-ui/images/lock-left-grey@3x-a1ab5bd1.png) no-repeat 0 50%/21px 21px; */
   width: 33px;
   height: 30px;
 }
 
 #password-confirmation-lock-icon.max-length {
-  /* password-confirmation-lock-icon top + (password-wrapper.expanded.max-length - password-wrapper.expanded */
   top: 229px;
 }
 
@@ -562,24 +503,17 @@ i {
 }
 
 #password-hidden {
-  /* height: 20px; */
-  /* margin-top: 8px; */
   margin-bottom: 25px;
   text-align: left;
   display: none;
   transition: 0.1s;
-  /* display: inline-block; */
-  /* visibility: hidden; */
   line-height: 1;
-  /* vertical-align: top; */
 }
 
 #password-validation-success {
   color: #51aa4d;
   position: absolute;
   top: 30%;
-  /* display: inline; */
-  /* vertical-align: top; */
 }
 
 #password-validation-success {
@@ -631,7 +565,6 @@ i {
 
 .password-validation-icon {
   display: inline-block;
-  /* margin-top: 2px; */
   height: 12px;
   width: 12px;
   background: url(https://plugin.intuitcdn.net/identity-authn-core-ui/images/small_x_error@4x-92edf365.png) 0 0/9px 10px no-repeat;
@@ -648,8 +581,6 @@ i {
   background: url(https://plugin.intuitcdn.net/identity-authn-core-ui/images/small_check_success@3x-aeb1ee30.png) 0 0/12px 10px no-repeat;
 }
 
-
-
 #create-account {
   width: 318px;
   height: 44px;
@@ -661,7 +592,6 @@ i {
 }
 
 #create-account-lock-img {
-  /* background-color: white; */
   background-image: url(https://plugin.intuitcdn.net/identity-authn-core-ui/images/icon-whitelock@3x-76f33cec.png);  
   height: 1em;
   width: .8em;
@@ -676,11 +606,7 @@ i {
   background-color: #eceef1;
   font-size: 10px;
   color: #8d9096;
-  /* border: 1px black solid; */
   padding: 19px 16px;
-  /* width: 398px;
-  border-top-width: 0;
-  border-color: rgb(199, 199, 199); */
 }
 
 #sign-up-widget {
@@ -692,15 +618,6 @@ i {
 /********************** Pop-ins ****************************/
 .popup {
   visibility: hidden;
-  /* background: rgb(64,64,64);
-  position: relative;
-  color: white;
-  left: 340px;
-  bottom: 50px;
-  width: 200px;
-  text-align: left;
-  padding: 10px 20px;
-  border-radius: 4px; */
 }
 
 .popup-arrow {
@@ -709,7 +626,6 @@ i {
   height: 0px; 
   position: relative;
   left: 327px;
-  /* bottom: 10px; */
   /* Change left and bottom position if angle is changed */
   border-top: 8px solid transparent;
   border-bottom: 8px solid transparent; 
@@ -717,7 +633,6 @@ i {
 }
 
 .popup-body {
-  /* visibility: visible; */
   position: absolute;
   margin-left: 15px;
   margin-bottom: 0;
@@ -732,10 +647,6 @@ i {
   line-height: 1.2;
   text-align: left;
 }
-
-/* #email-popout {
-  bottom: 33px;
-} */
 
 #email-arrow {
   position: absolute;
@@ -757,7 +668,6 @@ i {
 
 .rel {
   position: relative;
-  /* display: flex; */
 }
 
 .visible {
@@ -766,66 +676,10 @@ i {
 
 #create-account-info {
   color: #757575;
-  /* font-size: 14px; */
   font-style: italic;
   padding: 0 20px;
   line-height: 19px;
 }
-
-/* .mo:focus-within:after {
-  position: absolute;
-  left: 0px;
-  top: 0px;
-  background: rgb(64,64,64);
-  content: "Create a password you've never used before.  This will help keep your account safe.";
-  content: "You'll use this as your user ID";
-  transform: translate(-50%);
-  width: 200px;
-  padding: 8px 4px;
-  border-radius: 4px;
-  color: #eee;
-  font-weight: 500;
-}
-
-.arrow:focus-within:before {
-  width: 0; 
-  height: 0; 
-  position: absolute;
-  left: 772px;
-  top: 360px;
-  content: '';
-}
- */
-
-
-/* .mo:hover::after {
-  position: absolute;
-  top: 28px;
-  left: 50%;
-  transform: translate(-50%);
-  width: 100px;
-  padding: 8px 4px;
-  border-radius: 2px;
-  color: #eee;
-  font-weight: 500;
-}
-
-.mo:hover:before {
-  content: '';
-  width: 1px;
-  height: 1px;
-  background: transparent;
-  position: absolute;
-  top: 12px;
-  left: 50%;
-  transform: translate(-50%);
-  border: 8px solid transparent;
-  border-bottom: 8px solid rgb(64,64,64);
-} */
-
-/* .mo:hover {
-  background: red;
-} */
 
 /*********************** Footer **********************/
 
@@ -837,8 +691,6 @@ footer {
   display: inline-block;
   padding-top: 5px;
 }
-
-
 
 #copyright {
   color: #505050;
